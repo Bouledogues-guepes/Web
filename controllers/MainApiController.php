@@ -95,7 +95,7 @@ class MainApiController extends ApiController
      */
     function getRessourcesRandom(int $limite = 10): string
     {
-        $ressources = $this->ressourceModel->getRandomRessource($limite);
+        $ressources = $this->ressourceModel->getRecentRessource($limite);
 
         if (!$ressources) {
             return parent::toJSON([]);
