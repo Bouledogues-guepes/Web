@@ -37,7 +37,7 @@ class UserController extends WebController
      * @return string
      */
 
-    function EmailValide($email) {
+    function VerifEmail($email) {
         $pattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
 
         if (preg_match($pattern, $email)) {
@@ -84,46 +84,40 @@ class UserController extends WebController
     function signup(): string
     {
         $data = array();
-
         // Si l'utilisateur est déjà connecté, on le redirige vers sa page de profil
         if (SessionHelpers::isConnected()) {
             return $this->redirect("/me");
         }
 
+        if (!isset($_POST["boutonInscrire"])) {
 
-        // Gestion de l'inscription
-        if
-        (
-            isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["tel"])
-            && $_POST["email"]!="" && $_POST["password"]!="" && $_POST["nom"]!="" && $_POST["pernom"]!="" && $_POST["tel"]!=""
-            && EmailValide($_POST["email"]) && count($_POST["email"])<=64
-        )
-        {
+            // Gestion de l'inscription
+            if
+            (
+                isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["tel"])
+                && $_POST["email"] != "" && $_POST["password"] != "" && $_POST["nom"] != "" && $_POST["prenom"] != "" && $_POST["tel"] != ""
+                && $this->VerifEmail($_POST["email"]) && strlen($_POST["email"]) <= 64
+            ) {
 
-            $_POST["tel"] = str_replace(' ', '', $_POST["tel"]);
-            if ((int)$_POST["tel"])
-            {
+                $_POST["tel"] = str_replace(' ', '', $_POST["tel"]);
 
-            }
+                $result = $this->emprunteur->creerEmprenteur($_POST["tel"], $_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"]);
 
 
-            $result = $this->emprunteur->creerEmprenteur($_POST["tel"],$_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"]);
-
-            // Si l'inscription est réussie, on affiche un message de succès
-            if ($result)
-            {
-                return Template::render("views/user/signup-success.php");
-            }
-            else
-            {
-                // Sinon, on affiche un message d'erreur
-                $data["error"] = "La création du compte a échoué";
+                // Si l'inscription est réussie, on affiche un message de succès
+                if ($result) {
+                    return Template::render("views/user/signup-success.php");
+                } else {
+                    // Sinon, on affiche un message d'erreur
+                    $data["error"] = "La création du compte a échoué";
+                }
             }
         }
         else
         {
             $data["error"] = "La création du compte a échoué";
         }
+
 
         // Affichage de la page d'inscription
         return Template::render("views/user/signup.php", $data);

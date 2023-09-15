@@ -64,7 +64,7 @@
 
                     <div class="text-center">
                         <button type="submit"
-                                class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
+                                class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full" name="boutonInscrire">
                             Créer un compte
                         </button>
                         <hr class="m-5">
