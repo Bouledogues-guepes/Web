@@ -1,3 +1,5 @@
+
+
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
     <div class="flex flex-wrap">
         <!-- Colonne de gauche -->
@@ -16,8 +18,14 @@
                     </p>
                     <p class="text-gray-600 mb-2"><span
                                 class="font-semibold">Prénom:</span> <?= $user->prenomemprunteur ?></p>
-                    <p class="text-gray-600 mb-2"><span
-                                class="font-semibold">Téléphone:</span> <?= $user->telportable ?></p>
+
+                    <div>
+                        <p class="text-gray-600 mb-2" id="telAmasquer"><span
+                                    class="font-semibold">Téléphone:</span> <?= $user->telportable ?></p>
+
+                        <input type="checkbox" id="checkbox" name="Masquer">
+                        <label for="Masquer">Masquer le téléphone ?</label>
+                    </div>
                 </div>
 
                 <div class="p-5 text-center">
@@ -62,3 +70,6 @@
         </div>
     </div>
 </div>
+
+
+<script src="../../public/js/masquerLeTelephone.js"></script>
