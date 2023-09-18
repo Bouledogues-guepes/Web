@@ -71,5 +71,4 @@
     </div>
 </div>
 
-
 <script src="../../public/js/masquerLeTelephone.js"></script>
