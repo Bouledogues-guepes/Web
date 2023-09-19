@@ -65,4 +65,9 @@ class CatalogueController extends WebController
 
         return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire));
     }
+
+    function apropos(): string
+    {
+        return Template::render("views/apropos/apropos.php");
+    }
 }

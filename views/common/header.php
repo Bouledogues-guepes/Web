@@ -16,7 +16,10 @@
 <!-- En-tête -->
 <header class="bg-white">
     <nav class="container mx-auto px-4 py-6 flex items-center justify-between">
-        <a href="/" class="text-2xl font-semibold text-gray-800">Médiathèque</a>
+
+        <img src="/public/images/olivia%20wilson.png" alt="Image d'illustration" class="logo">
+        <a href="/" class="text-2xl font-semibold text-gray-800 ">Médiathèque</a>
+
         <ul class="space-x-4 flex">
             <li><a href="/apropos" class="text-gray-600 hover:text-gray-800">À propos</a></li>
             <li><a href="/catalogue/all" class="text-gray-600 hover:text-gray-800">Parcourir les ressources</a></li>

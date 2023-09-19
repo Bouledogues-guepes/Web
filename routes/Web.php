@@ -56,7 +56,7 @@ class Web
         Route::Add('/catalogue/detail/{id}', [$catalogue, 'detail']);
         Route::Add('/catalogue/{type}', [$catalogue, 'liste']);
 
-        Route::Add('/apropos',[$catalogue,'pageApropos']);
+        Route::Add('/apropos',[$catalogue,'apropos']);
     }
 }
 
