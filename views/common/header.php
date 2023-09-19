@@ -17,7 +17,7 @@
 <header class="bg-white">
     <nav class="container mx-auto px-4 py-6 flex items-center justify-between">
 
-        <img src="/public/images/olivia%20wilson.png" alt="Image d'illustration" class="logo">
+        <!--<img src="/public/images/olivia%20wilson.png" alt="Image d'illustration" class="logo"> -->
         <a href="/" class="text-2xl font-semibold text-gray-800 ">Médiathèque</a>
 
         <ul class="space-x-4 flex">
@@ -35,6 +35,7 @@
                     </a>
                 <?php } ?>
             </li>
+
         </ul>
     </nav>
 </header>
