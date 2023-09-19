@@ -55,6 +55,8 @@ class Web
         // Route permettant l'accès au catalogue.
         Route::Add('/catalogue/detail/{id}', [$catalogue, 'detail']);
         Route::Add('/catalogue/{type}', [$catalogue, 'liste']);
+
+        Route::Add('/apropos',[$catalogue,'pageApropos']);
     }
 }
 
