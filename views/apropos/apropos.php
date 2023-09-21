@@ -1,66 +1,51 @@
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
-    <div class="bg-white shadow-lg rounded-lg px-6 py-4 max-w-xl m-auto">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">MEDIA’TOUT, une mediathèque pas comme les autres !</h1>
+    <div class="max-w-2xl mx-auto">
 
-        <div id="carouselExampleFade" class="carousel slide carousel-fade">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="../../public/images/olivia%20wilson.png" class="d-block w-100" alt="...">
+        <div id="default-carousel" class="relative" data-carousel="static">
+            <!-- Carousel wrapper -->
+            <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <span class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">First Slide</span>
+                    <img src="../../public/images/quisommesnous2.png" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                 </div>
-                <div class="carousel-item">
-                    <img src="../../public/images/equipe.jpeg" class="d-block w-100" alt="...">
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                 </div>
-                <div class="carousel-item">
-                    <img src="../../public/images/olivia%20wilson.png" class="d-block w-100" alt="...">
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+            <!-- Slider indicators -->
+            <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+            </div>
+            <!-- Slider controls -->
+            <button type="button" class="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 white:bg-white-800/30 group-hover:bg-black/50 dark:group-hover:bg-black-800/60 group-focus:ring-4 group-focus:ring-white white:group-focus:ring-white-800/70 group-focus:outline-none">
+                <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-black-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="hidden">Previous</span>
+            </span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+            <button type="button" class="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 white:bg-white-800/30 group-hover:bg-black/50 dark:group-hover:bg-black-800/60 group-focus:ring-4 group-focus:ring-white white:group-focus:ring-white-800/70 group-focus:outline-none">
+                <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-black-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="hidden">Next</span>
+            </span>
             </button>
         </div>
 
-
-
-
-
-
-        <!--
-        <div class="flex flex-col justify-between">
-
-            <img src="/public/images/olivia%20wilson.png" alt="Image d'illustration" class="img-thumbnail">
-
-            <div class="flex-1 mb-4">
-                <h2 class="text-xl font-semibold text-gray-800">Notre équipe</h2>
-                <p class="text-gray-600">Romain Canevet</p>
-                <p class="text-gray-600">Tom Bury</p>
-            </div>
-
-            <div class="flex flex-row justify-between">
-                <div class="flex-1 mb-4">
-                    <h2 class="text-xl font-semibold text-gray-800">Samedi</h2>
-                    <p class="text-gray-600">10h00 - 16h00</p>
-                </div>
-
-                <div class="flex-1">
-                    <h2 class="text-xl font-semibold text-gray-800">Dimanche</h2>
-                    <p class="text-gray-600">Fermé</p>
-                </div>
-            </div>
-        -->
-            <!-- Fermeture annuelle, message important -->
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                Fermeture annuelle : 1er janvier, 1er mai, 25 décembre
-            </div>
-        </div>
+        <p class="mt-5">This carousel slider component is part of a larger, open-source library of Tailwind CSS components. Learn
+            more
+            by going to the official <a class="text-blue-600 hover:underline"
+                                        href="https://flowbite.com/docs/getting-started/introduction/" target="_blank">Flowbite Documentation</a>.
+        </p>
+        <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
     </div>
+
 </div>
