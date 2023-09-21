@@ -89,7 +89,7 @@ class UserController extends WebController
             return $this->redirect("/me");
         }
 
-        if (!isset($_POST["boutonInscrire"])) {
+        if (isset($_POST["boutonInscrire"])) {
 
             // Gestion de l'inscription
             if
@@ -97,7 +97,8 @@ class UserController extends WebController
                 isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["tel"])
                 && $_POST["email"] != "" && $_POST["password"] != "" && $_POST["nom"] != "" && $_POST["prenom"] != "" && $_POST["tel"] != ""
                 && $this->VerifEmail($_POST["email"]) && strlen($_POST["email"]) <= 64
-            ) {
+            )
+            {
 
                 $_POST["tel"] = str_replace(' ', '', $_POST["tel"]);
 

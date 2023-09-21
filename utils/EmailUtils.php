@@ -16,7 +16,7 @@ class EmailUtils
 
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = $config["MAIL_SERVER"] ?: 'localhost';
+        $mail->Host = $config["MAIL_SERVER"] ?: 'http://mailap3.dombtsig.local/';
         $mail->SMTPAuth = false;
         $mail->Port = 1025;
 
