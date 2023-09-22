@@ -6,7 +6,7 @@ $DB_USER = getenv("MVC_USER") ?: "bouledogues-guepes-1";
 $DB_PASSWORD = getenv("MVC_TOKEN") ?: "QVvnfAPP";
 $DEBUG = getenv("MVC_DEBUG") ?: true;
 $URL_VALIDATION = getenv("MVC_URL_VALIDATION") ?: "http://localhost:9000/valider-compte/";
-$MAIL_SERVER = getenv("MVC_MAIL_SERVER") ?: "http://mailap3.dombtsig.local/";
+$MAIL_SERVER = getenv("MVC_MAIL_SERVER") ?: "192.168.10.15";
 $FROM_EMAIL = getenv("MVC_FROM_EMAIL") ?: "contact@mediaatout.fr";
 
 return array(

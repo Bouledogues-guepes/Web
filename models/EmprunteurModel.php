@@ -117,6 +117,11 @@ class EmprunteurModel extends SQL
          * - Supprimer l'UUID de la colonne validationtoken
          */
 
+
+
+
+
+
         /**
          * Rappel
          *

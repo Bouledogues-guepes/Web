@@ -3,6 +3,7 @@
 namespace controllers;
 
 use controllers\base\WebController;
+use Exception;
 use models\EmprunterModel;
 use models\EmprunteurModel;
 use utils\SessionHelpers;
@@ -88,7 +89,7 @@ class UserController extends WebController
         if (SessionHelpers::isConnected()) {
             return $this->redirect("/me");
         }
-
+        /**
         if (isset($_POST["boutonInscrire"])) {
 
             // Gestion de l'inscription
@@ -118,7 +119,37 @@ class UserController extends WebController
         {
             $data["error"] = "La création du compte a échoué";
         }
+*/
+        if (isset($_POST["boutonInscrire"])) {
+            try {
+                // Vérification des champs requis et des contraintes
+                if (
+                    !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["nom"]) || !isset($_POST["prenom"]) || !isset($_POST["tel"])
+                    || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["nom"]) || empty($_POST["prenom"]) || empty($_POST["tel"])
+                    || !$this->VerifEmail($_POST["email"]) || strlen($_POST["email"]) > 64 || strlen($_POST["nom"])<1 || strlen($_POST["prenom"])<1
+                ) {
+                    throw new Exception("Les données fournies sont invalides.");
+                }
 
+                $_POST["tel"] = str_replace(' ', '', $_POST["tel"]);
+
+                $result = $this->emprunteur->creerEmprenteur($_POST["tel"], $_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"]);
+
+                // Si l'inscription est réussie, on affiche un message de succès
+                if ($result) {
+                    return Template::render("views/user/signup-success.php");
+                } else {
+                    throw new Exception("La création du compte a échoué.");
+                }
+            } catch (Exception $e) {
+                $data["error"] = $e->getMessage();
+            }
+        }
+        /**
+        else {
+            $data["error"] = "La création du compte a échoué.";
+        }
+        */
 
         // Affichage de la page d'inscription
         return Template::render("views/user/signup.php", $data);
