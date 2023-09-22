@@ -117,6 +117,21 @@ class EmprunteurModel extends SQL
          * - Supprimer l'UUID de la colonne validationtoken
          */
 
+        $sql ='SELECT validationtoken FROM emprunteur WHERE validationtoken=?';
+        $stmt = parent::getPdo()->prepare($sql);
+        $result=$stmt->execute([$uuid]);
+
+        if($result==$uuid) {
+
+            $config = include("configs.php");
+            $sql = 'UPDATE emprunteur SET validationcompte = 1 WHERE validationtoken=?;';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$uuid]);
+
+            $sql = 'UPDATE emprunteur SET validationtoken = null WHERE validationtoken=?;';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$uuid]);
+        }
 
 
 
