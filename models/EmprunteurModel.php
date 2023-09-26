@@ -34,6 +34,7 @@ class EmprunteurModel extends SQL
         $stmt->execute([$email]);
         $user = $stmt->fetch(\PDO::FETCH_OBJ);
 
+
         if ($user == null) {
             return false;
         }
@@ -43,7 +44,23 @@ class EmprunteurModel extends SQL
             return true;
         }
 
+
+
+
+
         return false;
+    }
+
+    public function getValidation(mixed $email): int
+    {
+        $config = include("configs.php");
+        $sql = 'SELECT validationcompte FROM emprunteur WHERE emailemprunteur = ?';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$email]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return (int)$result['validationcompte'];
+
     }
 
     public function creerEmprenteur(mixed $tel,mixed $email, mixed $password, mixed $nom, mixed $prenom): bool

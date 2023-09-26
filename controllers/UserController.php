@@ -54,22 +54,41 @@ class UserController extends WebController
         $data = array();
 
         // Si l'utilisateur est déjà connecté, on le redirige vers sa page de profil
-        if (SessionHelpers::isConnected()) {
-            return $this->redirect("/me");
-        }
+
 
 
         // Gestion de la connexion
-        if (isset($_POST["email"]) && isset($_POST["password"])) {
+        if (isset($_POST["email"]) && isset($_POST["password"]))
+        {
+
             $result = $this->emprunteur->connexion($_POST["email"], $_POST["password"]);
+            $validationcompte=$this->emprunteur->getValidation($_POST["email"]);
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
-            if ($result) {
+
+            if ($result && ($validationcompte==1 || $validationcompte==2)) {
                 $this->redirect("/me");
-            } else {
-                // Sinon, on affiche un message d'erreur
-                $data["error"] = "Email ou mot de passe incorrect";
             }
+            else {
+                if (!$result)
+                {
+                    $data["error"] = "Email ou mot de passe incorrect";
+                }
+                elseif ($validationcompte == 0) {
+                    $data["error"] = "Compte non-validé";
+
+                } elseif ($validationcompte == 3) {
+                    $data["error"] = "Compte banni";
+                } elseif ($validationcompte == 4) {
+                    $data["error"] = "Compte supprimé";
+                }
+
+
+            }
+        }
+
+        if (SessionHelpers::isConnected() && ($validationcompte!=0 || $validationcompte!=3 || $validationcompte!=4 ) ) {
+            $this->redirect("/me");
         }
 
         // Affichage de la page de connexion
@@ -89,37 +108,7 @@ class UserController extends WebController
         if (SessionHelpers::isConnected()) {
             return $this->redirect("/me");
         }
-        /**
-        if (isset($_POST["boutonInscrire"])) {
 
-            // Gestion de l'inscription
-            if
-            (
-                isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["tel"])
-                && $_POST["email"] != "" && $_POST["password"] != "" && $_POST["nom"] != "" && $_POST["prenom"] != "" && $_POST["tel"] != ""
-                && $this->VerifEmail($_POST["email"]) && strlen($_POST["email"]) <= 64
-            )
-            {
-
-                $_POST["tel"] = str_replace(' ', '', $_POST["tel"]);
-
-                $result = $this->emprunteur->creerEmprenteur($_POST["tel"], $_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"]);
-
-
-                // Si l'inscription est réussie, on affiche un message de succès
-                if ($result) {
-                    return Template::render("views/user/signup-success.php");
-                } else {
-                    // Sinon, on affiche un message d'erreur
-                    $data["error"] = "La création du compte a échoué";
-                }
-            }
-        }
-        else
-        {
-            $data["error"] = "La création du compte a échoué";
-        }
-*/
         if (isset($_POST["boutonInscrire"])) {
             try {
                 // Vérification des champs requis et des contraintes
@@ -145,12 +134,6 @@ class UserController extends WebController
                 $data["error"] = $e->getMessage();
             }
         }
-        /**
-        else {
-            $data["error"] = "La création du compte a échoué.";
-        }
-        */
-
         // Affichage de la page d'inscription
         return Template::render("views/user/signup.php", $data);
     }
