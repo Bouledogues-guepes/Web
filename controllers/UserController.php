@@ -111,13 +111,30 @@ class UserController extends WebController
 
         if (isset($_POST["boutonInscrire"])) {
             try {
-                // Vérification des champs requis et des contraintes
-                if (
-                    !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["nom"]) || !isset($_POST["prenom"]) || !isset($_POST["tel"])
-                    || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["nom"]) || empty($_POST["prenom"]) || empty($_POST["tel"])
-                    || !$this->VerifEmail($_POST["email"]) || strlen($_POST["email"]) > 64 || strlen($_POST["nom"])<1 || strlen($_POST["prenom"])<1
-                ) {
-                    throw new Exception("Les données fournies sont invalides.");
+                // Vérification des champs requis et des contraintes a l'aide de diffèrentes exception
+                if (!isset($_POST["tel"]) || empty($_POST["tel"]) || strlen($_POST["tel"])<6 )
+                {
+                    throw new Exception("Le téléphone est mal renseigné.");
+                }
+                if (strlen($_POST["password"]) <= 8)
+                {
+                    throw new Exception("Le mot de passe doit faire plus de 8 caractères");
+                }
+                if (!isset($_POST["password"]) || empty($_POST["password"]))
+                {
+                    throw new Exception("Erreur dans le mots de passe");
+                }
+                if ( !isset($_POST["email"]) || empty($_POST["email"]) || !$this->VerifEmail($_POST["email"]) || strlen($_POST["email"]) > 64)
+                {
+                    throw new Exception("Erreur dans l'email");
+                }
+                if (!isset($_POST["nom"]) ||  empty($_POST["nom"]) || strlen($_POST["nom"])<1)
+                {
+                    throw new Exception("Erreur dans le nom");
+                }
+                if ( !isset($_POST["prenom"]) || empty($_POST["prenom"]) || strlen($_POST["prenom"])<1)
+                {
+                    throw new Exception("Erreur dans le prenom");
                 }
 
                 $_POST["tel"] = str_replace(' ', '', $_POST["tel"]);
