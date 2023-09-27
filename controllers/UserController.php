@@ -66,7 +66,7 @@ class UserController extends WebController
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
 
-            if ($result && ($validationcompte==1 || $validationcompte==2)) {
+            if ($result && $validationcompte==1 ) {
                 $this->redirect("/me");
             }
             else {
@@ -76,20 +76,24 @@ class UserController extends WebController
                 }
                 elseif ($validationcompte == 0) {
                     $data["error"] = "Compte non-validé";
+                    SessionHelpers::logout();
 
                 } elseif ($validationcompte == 3) {
                     $data["error"] = "Compte banni";
+                    SessionHelpers::logout();
+
                 } elseif ($validationcompte == 4) {
                     $data["error"] = "Compte supprimé";
+                    SessionHelpers::logout();
                 }
 
 
             }
         }
 
-        if (SessionHelpers::isConnected() && ($validationcompte!=0 || $validationcompte!=3 || $validationcompte!=4 ) ) {
-            $this->redirect("/me");
-        }
+        //if (SessionHelpers::isConnected() && ($validationcompte!=0 || $validationcompte!=3 || $validationcompte!=4 ) ) {
+        //    $this->redirect("/me");
+        //}
 
         // Affichage de la page de connexion
         return Template::render("views/user/login.php", $data);

@@ -28,6 +28,8 @@ class EmprunteurModel extends SQL
          */
 
         // TODO Il ne faut pas autoriser la connexion si le compte n'est pas validé
+        //$sql = 'SELECT * FROM emprunteur WHERE emailemprunteur = ?';
+        
 
         $sql = 'SELECT * FROM emprunteur WHERE emailemprunteur = ?';
         $stmt = parent::getPdo()->prepare($sql);
