@@ -56,12 +56,28 @@ class EmprunteurModel extends SQL
     public function getValidation(mixed $email): int
     {
         $config = include("configs.php");
+
+        $sql = 'SELECT emailemprunteur FROM emprunteur';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute();
+        $tabemail = $stmt->fetchall();
+
+
         $sql = 'SELECT validationcompte FROM emprunteur WHERE emailemprunteur = ?';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$email]);
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return (int)$result['validationcompte'];
+        foreach ($tabemail as $row) {
+            foreach ($row as $columnName => $value) {
+                if ($email==$value)
+                {
+                    return (int)$result['validationcompte'];
+                }
+            }
+        }
+
+        return 5;
 
     }
 
@@ -127,14 +143,7 @@ class EmprunteurModel extends SQL
 
     public function validateAccount($uuid)
     {
-        /*
-         * Méthode à implémenter
-         *
-         * Il faut :
-         * - Vérifier que l'UUID est valide (vérifier que l'utilisateur existe), colonne validationtoken
-         * - Mettre à jour la colonne validationcompte à 1
-         * - Supprimer l'UUID de la colonne validationtoken
-         */
+
 
         $sql ='SELECT validationtoken FROM emprunteur WHERE validationtoken=?';
         $stmt = parent::getPdo()->prepare($sql);

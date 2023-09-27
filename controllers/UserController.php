@@ -66,7 +66,7 @@ class UserController extends WebController
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
 
-            if ($result && $validationcompte==1 ) {
+            if ($result && ($validationcompte==1 || $validationcompte==2)) {
                 $this->redirect("/me");
             }
             else {
@@ -78,7 +78,13 @@ class UserController extends WebController
                     $data["error"] = "Compte non-validé";
                     SessionHelpers::logout();
 
-                } elseif ($validationcompte == 3) {
+                }
+                elseif ($validationcompte == 5) {
+                    $data["error"] = "Email ou mot de passe incorrect";
+                    SessionHelpers::logout();
+
+                }
+                elseif ($validationcompte == 3) {
                     $data["error"] = "Compte banni";
                     SessionHelpers::logout();
 
