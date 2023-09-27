@@ -26,17 +26,28 @@ class CatalogueController extends WebController
      */
     function liste(string $type): string
     {
+
+        $listtype= $this->ressourceModel->getAllType();
+
         if ($type == "all") {
             // Récupération de l'ensemble du catalogue
             $catalogue = $this->ressourceModel->getAll();
 
             // Affichage de la page à l'utilisateur
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue));
-        } else {
-            // Les autres types de ressources ne sont pas encore implémentés.
-            return $this->redirect("/");
+            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"catalogue" => $catalogue ));
+        }
+
+        else
+        {
+            $catalogue = $this->ressourceModel->getRessourceByType($type);
+
+            return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue]);
+
         }
     }
+
+
+
 
     /**
      * Affiche le détail d'une ressource.

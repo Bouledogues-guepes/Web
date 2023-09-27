@@ -38,6 +38,7 @@ class Web
         Route::Add('/login', [$user, 'login']);
         Route::Add('/signup', [$user, 'signup']);
 
+
         // Validation de l'inscription.
         Route::Add('/valider-compte/{uuid}', [$user, 'signupValidate']);
 
