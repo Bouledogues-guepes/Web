@@ -34,7 +34,7 @@ class CatalogueController extends WebController
             $catalogue = $this->ressourceModel->getAll();
 
             // Affichage de la page à l'utilisateur
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"catalogue" => $catalogue ));
+            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue ));
         }
 
         else
