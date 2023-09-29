@@ -34,17 +34,17 @@ class RessourceModel extends SQL
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function getRessourceByType(string $libelle):array
+    public function getRessourceByType(string $id):array
     {
-        $sql = 'SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie where libellecategorie=?;';
+        $sql = 'SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie where categorie.idcategorie=?;';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute([$libelle]);
+        $stmt->execute([$id]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function getAllType():array
     {
-        $sql = 'SELECT libellecategorie FROM categorie';
+        $sql = 'SELECT idcategorie,libellecategorie FROM categorie';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
