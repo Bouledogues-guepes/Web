@@ -9,9 +9,9 @@
 </head>
 <body class="bg-gray-100 font-sans">
 <div class="container mx-auto p-8">
-    <h1 class="text-3xl font-bold mb-4">Remerciements pour l'emprunt</h1>
+    <h1 class="text-3xl font-bold mb-4">Merci de nous faire confiance</h1>
 
-    <p class="text-lg">Nous tenons à vous remercier pour avoir emprunter <?= $idRessource ?> via notre médiathèque.</p>
+    <p class="text-lg">Nous tenons à vous remercier pour avoir emprunter <?= $titre ?> via notre médiathèque.</p>
     <p class="mt-4">Nous espérons que vous apprécierez et que vous reviendrez bientôt.</p>
     <p class="mt-4">À bientôt !</p>
 </div>

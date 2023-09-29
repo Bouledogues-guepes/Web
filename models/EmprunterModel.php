@@ -25,16 +25,44 @@ class EmprunterModel extends SQL
             $sql = 'INSERT INTO emprunter (idressource, idexemplaire, idemprunteur, datedebutemprunt, dureeemprunt, dateretour) VALUES (?, ?, ?, NOW(), 30, DATE_ADD(NOW(), INTERVAL 1 MONTH))';
             $stmt = parent::getPdo()->prepare($sql);
 
+            $titre="";
+            $nomemprunteur="";
+            $prenomemprunteur="";
+            $email="";
+
             $data=$this->getTouteInfo($idemprunteur);
+
+            $infolivre=$this->getLivreById($idRessource,$idemprunteur);
+
+
+
+
+
+            foreach ($data as $row) {
+                foreach ($row as $key => $value)
+                {
+                    if ($key == "emailemprunteur")
+                    {
+                        $email=$value;
+                    }
+                }
+            }
+
+            foreach ($infolivre as $ligne)
+            {
+                foreach ($ligne as $valeur)
+                {
+
+                    $titre=$valeur;
+                }
+            }
 
 
             $config = include("configs.php");
 
-            EmailUtils::sendEmail($data["emailemprunteur"], "Merci d'avoir d'emprunter", "aEmprunter",
+            EmailUtils::sendEmail($email, "Merci d'avoir d'emprunter", "aEmprunter",
                 array(
-                    "titre" => $data["titre"],
-                    "nom" => $data["nomemprunteur"],
-                    "prenom" => $data["prenomemprunteur"]
+                    "titre" => $titre
                 )
             );
 
@@ -67,6 +95,18 @@ class EmprunterModel extends SQL
             $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie inner join emprunteur on emprunter.idemprunteur = emprunteur.idemprunteur WHERE emprunter.idemprunteur = ?';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function getLivreById($id,$idemprunteur): bool|array
+    {
+        try {
+            $sql = 'SELECT DISTINCT titre FROM emprunter LEFT JOIN ressource on emprunter.idressource=ressource.idressource where emprunter.idemprunteur =? and emprunter.idressource = ?;';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$id,$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
         } catch (\PDOException $e) {
             return false;
