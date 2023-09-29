@@ -3,6 +3,7 @@
 namespace models;
 
 use models\base\SQL;
+use utils\EmailUtils;
 
 class EmprunterModel extends SQL
 {
@@ -23,6 +24,20 @@ class EmprunterModel extends SQL
         try {
             $sql = 'INSERT INTO emprunter (idressource, idexemplaire, idemprunteur, datedebutemprunt, dureeemprunt, dateretour) VALUES (?, ?, ?, NOW(), 30, DATE_ADD(NOW(), INTERVAL 1 MONTH))';
             $stmt = parent::getPdo()->prepare($sql);
+
+            $data=$this->getTouteInfo($idemprunteur);
+
+
+            $config = include("configs.php");
+
+            EmailUtils::sendEmail($data["emailemprunteur"], "Merci d'avoir d'emprunter", "aEmprunter",
+                array(
+                    "titre" => $data["titre"],
+                    "nom" => $data["nomemprunteur"],
+                    "prenom" => $data["prenomemprunteur"]
+                )
+            );
+
             return $stmt->execute([$idRessource, $idExemplaire, $idemprunteur]);
         } catch (\PDOException $e) {
             return false;
@@ -45,6 +60,20 @@ class EmprunterModel extends SQL
             return false;
         }
     }
+
+    public function getTouteInfo($idemprunteur): bool|array
+    {
+        try {
+            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie inner join emprunteur on emprunter.idemprunteur = emprunteur.idemprunteur WHERE emprunter.idemprunteur = ?';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idemprunteur]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+
 
     /**
      * Retourne les 5 ressources les plus empruntées.

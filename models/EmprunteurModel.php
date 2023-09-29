@@ -103,6 +103,7 @@ class EmprunteurModel extends SQL
             $result = $stmt->execute([$tel,$email, $password_hash, $nom, $prenom, $UUID]);
 
             if ($result) {
+
                 // Envoi d'un email de validation du compte
                 // On utilise la fonction sendEmail de la classe EmailUtils
                 // L'email contient un lien vers la page de validation du compte, avec l'UUID généré précédemment

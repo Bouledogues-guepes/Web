@@ -122,7 +122,7 @@ class UserController extends WebController
         if (isset($_POST["boutonInscrire"])) {
             try {
                 // Vérification des champs requis et des contraintes a l'aide de diffèrentes exception
-                if (!isset($_POST["tel"]) || empty($_POST["tel"]) || strlen($_POST["tel"])<6 )
+                if (!isset($_POST["tel"]) || empty($_POST["tel"]) || strlen($_POST["tel"])<10 )
                 {
                     throw new Exception("Le téléphone est mal renseigné.");
                 }

@@ -36,11 +36,14 @@ class RessourceModel extends SQL
 
     public function getRessourceByType(string $id):array
     {
-        $sql = 'SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie where categorie.idcategorie=?;';
+
+        $sql = 'SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie where categorie.idcategorie in ('.$id.');';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
+
 
     public function getAllType():array
     {

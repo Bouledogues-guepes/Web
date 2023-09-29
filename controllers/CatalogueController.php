@@ -5,6 +5,7 @@ namespace controllers;
 use controllers\base\WebController;
 use models\ExemplaireModel;
 use models\RessourceModel;
+use models\CategorieModel;
 use utils\Template;
 
 class CatalogueController extends WebController
@@ -13,10 +14,13 @@ class CatalogueController extends WebController
     private RessourceModel $ressourceModel;
     private ExemplaireModel $exemplaireModel;
 
+    private CategorieModel $categorieModel;
+
     function __construct()
     {
         $this->ressourceModel = new RessourceModel();
         $this->exemplaireModel = new ExemplaireModel();
+        $this->categorieModel = new CategorieModel();
     }
 
     /**
@@ -27,7 +31,7 @@ class CatalogueController extends WebController
     function liste(string $type): string
     {
 
-        $listtype= $this->ressourceModel->getAllType();
+        $listtype= $this->categorieModel->getAllType();
 
         if ($type == "all") {
             // Récupération de l'ensemble du catalogue
@@ -39,7 +43,10 @@ class CatalogueController extends WebController
 
         else
         {
-            $catalogue = $this->ressourceModel->getRessourceByType($type);
+
+            $casser=explode('&amp;',$type);
+            $casser=implode(',',$casser);
+            $catalogue = $this->ressourceModel->getRessourceByType($casser);
 
             return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue]);
 
