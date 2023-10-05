@@ -53,4 +53,21 @@ class RessourceModel extends SQL
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function getLivreById($id): ?string
+    {
+        try {
+            $sql = 'SELECT titre from ressource where idressource = ?;';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$id]);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if ($result && isset($result['titre'])) {
+                return $result['titre'];
+            } else {
+                return null;
+            }
+        } catch (\PDOException $e) {
+            return null;
+        }
+    }
 }

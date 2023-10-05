@@ -4,6 +4,8 @@
 namespace utils;
 
 
+use http\Cookie;
+
 class SessionHelpers
 {
     public function __construct()
@@ -44,4 +46,11 @@ class SessionHelpers
     {
         return SessionHelpers::isLogin();
     }
+
+    //public static function getCookie(string $nomcookie): string
+    //{
+    //    if (SessionHelpers::isLogin() && isset($_COOKIE[$nomcookie])) {
+    //        return $_COOKIE[$nomcookie];
+    //    }
+    //}
 }

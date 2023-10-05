@@ -6,6 +6,8 @@ use controllers\base\WebController;
 use Exception;
 use models\EmprunterModel;
 use models\EmprunteurModel;
+use models\RessourceModel;
+use utils\EmailUtils;
 use utils\SessionHelpers;
 use utils\Template;
 
@@ -13,12 +15,16 @@ class UserController extends WebController
 {
     // On déclare les modèles utilisés par le contrôleur.
     private EmprunteurModel $emprunteur; // Modèle permettant d'interagir avec la table emprunteur
+
     private EmprunterModel $emprunter; // Modèle permettant l'emprunt
+
+    private RessourceModel $ressource;
 
     function __construct()
     {
         $this->emprunteur = new EmprunteurModel();
         $this->emprunter = new EmprunterModel();
+        $this->ressource = new RessourceModel();
     }
 
     /**
@@ -96,10 +102,6 @@ class UserController extends WebController
 
             }
         }
-
-        //if (SessionHelpers::isConnected() && ($validationcompte!=0 || $validationcompte!=3 || $validationcompte!=4 ) ) {
-        //    $this->redirect("/me");
-        //}
 
         // Affichage de la page de connexion
         return Template::render("views/user/login.php", $data);
@@ -216,6 +218,19 @@ class UserController extends WebController
 
         // On déclare l'emprunt, et on redirige l'utilisateur vers sa page de profil
         $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
+        $titre = $this->ressource->getLivreById($idRessource);
+
+        $emprunts = $this->emprunter->getLastEmpruntDuree($user->idemprunteur);
+
+        EmailUtils::sendEmail($user->emailemprunteur, "Merci pour votre emprunt ! ", "aEmprunter",
+                array(
+                    "titre" => $titre,
+                    "nom" => $user->nomemprunteur,
+                    "prenom" => $user->prenomemprunteur,
+                    "debutemprunt" => $emprunts[0]->datedebutemprunt,
+                    "retouremprunt" => $emprunts[0]->dateretour
+                )
+            );
 
         if ($result) {
             $this->redirect("/me");
@@ -224,5 +239,6 @@ class UserController extends WebController
             die("Erreur lors de l'emprunt");
         }
     }
+
 
 }

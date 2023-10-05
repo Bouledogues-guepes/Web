@@ -1,5 +1,4 @@
 
-
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
     <div class="flex flex-wrap">
         <!-- Colonne de gauche -->
@@ -22,8 +21,18 @@
                     <div>
                         <p class="text-gray-600 mb-2" id="telAmasquer"><span
                                     class="font-semibold">Téléphone:</span> <?= $user->telportable ?></p>
+                        <?php
+                        $valeurDuCookie = isset($_COOKIE['masquerNumero']) ? $_COOKIE['masquerNumero'] : "";
 
-                        <input type="checkbox" id="checkbox" name="Masquer">
+                        // Génération du code HTML du formulaire
+                        echo '<input type="checkbox" id="checkbox" name="Masquer"';
+
+                        // Si le cookie a la valeur "masquer", cochez la case à cocher par défaut
+                        if ($valeurDuCookie === "masquer") {
+                            echo ' checked';
+                        }
+
+                        echo '>';?>
                         <label for="Masquer">Masquer le téléphone ?</label>
                     </div>
                 </div>
@@ -72,3 +81,13 @@
 </div>
 
 <script src="../../public/js/masquerLeTelephone.js"></script>
+
+<?php
+
+if (isset($_POST['Masquer'])) {
+    $valeurDuCookie = "masquer";
+    $duree = time() + 30 * 24 * 60 * 60; // Expire dans 30 jours
+    $chemin = "/"; // Le cookie est disponible dans tout le domaine
+    setcookie("masquerNumero", $valeurDuCookie, $duree, $chemin);
+}
+?>

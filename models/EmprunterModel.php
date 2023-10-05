@@ -25,47 +25,6 @@ class EmprunterModel extends SQL
             $sql = 'INSERT INTO emprunter (idressource, idexemplaire, idemprunteur, datedebutemprunt, dureeemprunt, dateretour) VALUES (?, ?, ?, NOW(), 30, DATE_ADD(NOW(), INTERVAL 1 MONTH))';
             $stmt = parent::getPdo()->prepare($sql);
 
-            $titre="";
-            $nomemprunteur="";
-            $prenomemprunteur="";
-            $email="";
-
-            $data=$this->getTouteInfo($idemprunteur);
-
-            $infolivre=$this->getLivreById($idRessource,$idemprunteur);
-
-
-
-
-
-            foreach ($data as $row) {
-                foreach ($row as $key => $value)
-                {
-                    if ($key == "emailemprunteur")
-                    {
-                        $email=$value;
-                    }
-                }
-            }
-
-            foreach ($infolivre as $ligne)
-            {
-                foreach ($ligne as $valeur)
-                {
-
-                    $titre=$valeur;
-                }
-            }
-
-
-            $config = include("configs.php");
-
-            EmailUtils::sendEmail($email, "Merci d'avoir d'emprunter", "aEmprunter",
-                array(
-                    "titre" => $titre
-                )
-            );
-
             return $stmt->execute([$idRessource, $idExemplaire, $idemprunteur]);
         } catch (\PDOException $e) {
             return false;
@@ -89,24 +48,12 @@ class EmprunterModel extends SQL
         }
     }
 
-    public function getTouteInfo($idemprunteur): bool|array
+    public function getLastEmpruntDuree($idemprunteur): bool|array
     {
         try {
-            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie inner join emprunteur on emprunter.idemprunteur = emprunteur.idemprunteur WHERE emprunter.idemprunteur = ?';
+            $sql = 'SELECT datedebutemprunt,dateretour FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? order by datedebutemprunt desc limit 1';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }
-
-    public function getLivreById($id,$idemprunteur): bool|array
-    {
-        try {
-            $sql = 'SELECT DISTINCT titre FROM emprunter LEFT JOIN ressource on emprunter.idressource=ressource.idressource where emprunter.idemprunteur =? and emprunter.idressource = ?;';
-            $stmt = parent::getPdo()->prepare($sql);
-            $stmt->execute([$id,$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
         } catch (\PDOException $e) {
             return false;
