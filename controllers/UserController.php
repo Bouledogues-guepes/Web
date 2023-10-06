@@ -250,8 +250,12 @@ class UserController extends WebController
         }
 
         $retard=$this->emprunter->getRetard($user->idemprunteur);
-        //var_dump($retard);
-        return Template::render("views/user/retard.php", array("user" => $user, "retard" => $retard));
+
+        //session_start();
+        //$_SESSION["dataRetard"]=$retard;
+
+        return Template::render("views/user/retard.php", array("user" => $user, "retard" => $retard), false);
+
     }
 
 }
