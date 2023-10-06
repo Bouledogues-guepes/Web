@@ -37,6 +37,11 @@
                     </a>
                 <?php } ?>
             </li>
+            <li>
+                <?php if (\utils\SessionHelpers::isLogin()) { ?>
+                    <a href="/me"><img src="../../../public/images/clocheNotif.png" class="w-8"/></a>
+                <?php } ?>
+            </li>
 
 
         </ul>

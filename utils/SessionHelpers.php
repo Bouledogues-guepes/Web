@@ -42,15 +42,16 @@ class SessionHelpers
         return isset($_SESSION['LOGIN']);
     }
 
+
     public static function isConnected(): bool
     {
         return SessionHelpers::isLogin();
     }
 
-    //public static function getCookie(string $nomcookie): string
-    //{
-    //    if (SessionHelpers::isLogin() && isset($_COOKIE[$nomcookie])) {
-    //        return $_COOKIE[$nomcookie];
-    //    }
-    //}
+    static function aRetard():bool
+    {
+        return 1;
+    }
+
+
 }

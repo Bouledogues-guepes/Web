@@ -78,4 +78,17 @@ class EmprunterModel extends SQL
             return [];
         }
     }
+
+
+    public function getRetard($idemprunteur) : array|bool
+    {
+        try {
+            $sql = 'SELECT * FROM emprunter where datediff(CURRENT_DATE,datedebutemprunt) >= dureeemprunt and idemprunteur = ?';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idemprunteur]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
 }

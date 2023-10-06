@@ -241,4 +241,17 @@ class UserController extends WebController
     }
 
 
+    function getRetard(): string
+    {
+        $user = SessionHelpers::getConnected();
+
+        if (!$user) {
+            die ("Erreur: utilisateur non connecté ou ids non renseignés");
+        }
+
+        $retard=$this->emprunter->getRetard($user->idemprunteur);
+        //var_dump($retard);
+        return Template::render("views/user/retard.php", array("user" => $user, "retard" => $retard));
+    }
+
 }

@@ -51,6 +51,8 @@ class Web
 
             // Action d'emprunt d'une ressource.
             Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
+
+            Route::Add('/me/retard',[$user,'getRetard']);
         }
 
         // Route permettant l'accès au catalogue.
