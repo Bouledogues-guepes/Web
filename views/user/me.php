@@ -1,3 +1,11 @@
+<?php
+$email=$user->emailemprunteur;
+$prenom=$user->prenomemprunteur;
+$nom=$user->nomemprunteur;
+$tel=$user->telportable;
+?>
+
+
 
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
     <div class="flex flex-wrap">
@@ -10,7 +18,9 @@
                 </div>
                 <h1 class="text-3xl font-bold text-gray-900 mb-4">👋 <?= $user->prenomemprunteur ?></h1>
                 <div class="mb-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Informations personnelles</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Informations personnelles </h2>
+
+
                     <p class="text-gray-600 mb-2"><span
                                 class="font-semibold">Email:</span> <?= $user->emailemprunteur ?></p>
                     <p class="text-gray-600 mb-2"><span class="font-semibold">Nom:</span> <?= $user->nomemprunteur ?>
@@ -34,13 +44,61 @@
 
                         echo '>';?>
                         <label for="Masquer">Masquer le téléphone ?</label>
+
+
                     </div>
+
+
                 </div>
 
                 <div class="p-5 text-center">
-                    <a class="bg-red-600 text-white hover:bg-red-900 font-bold py-3 px-6 rounded-full" href="/logout">
+                    <a class="bg-red-600 text-white hover:bg-red-900 font-bold py-4 px-6 rounded-full mr-2" href="/logout">
                         Déconnexion
                     </a>
+
+                    <button id="downloadButton" class="bg-indigo-200 text-white hover:bg-indigo-600 font-bold py-4 px-6 rounded-full ">
+
+                        <div>
+                            <img src="../../public/images/download.png" class="object-cover h-4 w-4">
+                        </div>
+                    </button>
+
+                    <script>
+                        const downloadButton = document.getElementById("downloadButton");
+
+                        // Créez un gestionnaire d'événements pour le clic sur le bouton
+                        downloadButton.addEventListener("click", function () {
+                        // Créez un objet JSON de données (remplacez cela par vos propres données)
+                        const jsonData = {
+                        nom: "John",
+                        prenom: "Doe",
+                        email: "john.doe@example.com",
+                        // Ajoutez d'autres données ici...
+                        };
+
+                        // Convertissez l'objet JSON en une chaîne JSON
+                        const jsonString = JSON.stringify(jsonData, null, 2);
+
+                        // Créez un objet Blob à partir de la chaîne JSON
+                        const blob = new Blob([jsonString], { type: "application/json" });
+
+                        // Générez une URL d'objet Blob pour le téléchargement
+                        const url = URL.createObjectURL(blob);
+
+                        // Créez un lien de téléchargement
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = "donnees.json"; // Nom du fichier de téléchargement
+                        a.style.display = "none";
+
+                        // Ajoutez le lien au DOM et déclenchez le clic
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Supprimez le lien du DOM après le téléchargement
+                        document.body.removeChild(a);
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -90,4 +148,8 @@ if (isset($_POST['Masquer'])) {
     $chemin = "/"; // Le cookie est disponible dans tout le domaine
     setcookie("masquerNumero", $valeurDuCookie, $duree, $chemin);
 }
+
+
+
+
 ?>
