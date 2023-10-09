@@ -38,32 +38,24 @@
                 <?php } ?>
             </li>
             <li>
-                <?php if (\utils\SessionHelpers::isLogin()) { ?>
+                <?php
+                    if (\utils\SessionHelpers::isLogin()) {
+                        ?>
+
                     <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
                         <img src="../../../public/images/clocheNotif.png" class="w-8"/>
                     </button>
-                <?php } ?>
+
+                <?php
+                    }
+                    ?>
             </li>
 
-            <div id="maDiv" class="hidden absolute z-50 bg-gray-200 p-4 rounded shadow-lg w-auto h-auto">
-                <p><strong>Liste de tout les retards:</strong></p>
-                <?php
-
-                if (!isset($_SESSION["dataRetard"]))
-                {
-                    echo 'Aucun retard';
-                }
-                else
-                {
-                    //echo $_SESSION["dataRetard"][0]."<br>";
-                    //echo $_SESSION["dataRetard"][1];
-                }
-
-                ?>
+            <div id="maDiv" class="hidden absolute z-50 bg-indigo-600 p-4 mt-16 rounded shadow-lg w-auto h-auto right-16" >
             </div>
 
             <script>
-                // JavaScript pour afficher/masquer la div lorsque le bouton est cliqué
+
                 const boutonAfficherMasquer = document.getElementById("boutonAfficherMasquer");
                 const maDiv = document.getElementById("maDiv");
 

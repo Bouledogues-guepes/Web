@@ -83,7 +83,18 @@ class EmprunterModel extends SQL
     public function getRetard($idemprunteur) : array|bool
     {
         try {
-            $sql = 'SELECT idemprunteur,idressource,idexemplaire,LEFT(datedebutemprunt,10) as datedebutemprunt,dureeemprunt,LEFT(dateretour,10) as dateretour FROM emprunter where datediff(CURRENT_DATE,datedebutemprunt) >= dureeemprunt and idemprunteur = ?';
+            $sql = 'SELECT titre,
+                idemprunteur,
+                emprunter.idressource,
+                idexemplaire,
+                LEFT(datedebutemprunt,10) as datedebutemprunt,
+                dureeemprunt,
+                LEFT(dateretour,10) as dateretour,
+                datediff(CURRENT_DATE,datedebutemprunt) as frais
+                
+                FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
+                
+                where datediff(CURRENT_DATE,datedebutemprunt) >= dureeemprunt and idemprunteur = ?;';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);

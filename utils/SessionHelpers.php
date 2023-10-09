@@ -48,10 +48,6 @@ class SessionHelpers
         return SessionHelpers::isLogin();
     }
 
-    static function aRetard():bool
-    {
-        return 1;
-    }
 
 
 }
