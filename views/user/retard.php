@@ -5,7 +5,10 @@
 <div class="flex flex-wrap flex-col">
 
     <?php
-    //echo $nombreElements = count($retard);
+
+    if (isset($_SESSION["NBRETARD"])) {
+        \utils\SessionHelpers::NBRETARD(count($nbRetard));
+    }
     if (count($retard) > 0) {
         for ($i = 1; $i < count($retard) + 1; $i++) {
             ?>
@@ -20,13 +23,15 @@
                 </div>
 
             </div>
+            <p class="text-red-600">( 1€ par jour non-rendu )</p>
             <br>
             <?php
         }
     } else {
-        echo "Aucun retard à signaler";
+        ?><p class="text-black font-semibold">Aucun retard à signaler</p><br>
+
+        <?php
     }
     ?>
-    <p class="text-red-600">( 1€ par jour non-rendu )</p>
+
 </div>
-<?php // Ajoutez la balise de fermeture PHP ici ?>

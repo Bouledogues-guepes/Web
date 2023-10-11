@@ -48,6 +48,9 @@ class SessionHelpers
         return SessionHelpers::isLogin();
     }
 
-
+    static function NBRETARD( int $nb): void
+    {
+        $_SESSION['NBRETARD'] = $nb;
+    }
 
 }

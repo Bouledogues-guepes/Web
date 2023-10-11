@@ -39,7 +39,7 @@ class EmprunterModel extends SQL
     public function getEmprunts($idemprunteur): bool|array
     {
         try {
-            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ?';
+            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? and EST_RENDU =0';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -80,7 +80,7 @@ class EmprunterModel extends SQL
     }
 
 
-    public function getRetard($idemprunteur) : array|bool
+    public function infoRetard($idemprunteur) : array|bool
     {
         try {
             $sql = 'SELECT titre,
@@ -94,7 +94,7 @@ class EmprunterModel extends SQL
                 
                 FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
                 
-                where datediff(CURRENT_DATE,datedebutemprunt) >= dureeemprunt and idemprunteur = ?;';
+                where datediff(CURRENT_DATE,datedebutemprunt) >= dureeemprunt and idemprunteur = ? and EST_RENDU=0;';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -102,4 +102,21 @@ class EmprunterModel extends SQL
             return false;
         }
     }
+
+    public function getRetard($idemprunteur): int|array
+    {
+        try {
+            $sql = 'SELECT EST_RENDU,titre
+                
+                FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
+                
+                where datediff(CURRENT_DATE,datedebutemprunt) >= dureeemprunt and idemprunteur = ? and EST_RENDU =0 group by emprunter.idressource;';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idemprunteur]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return -1;
+        }
+    }
+
 }

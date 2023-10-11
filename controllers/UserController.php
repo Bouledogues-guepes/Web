@@ -249,12 +249,11 @@ class UserController extends WebController
             die ("Erreur: utilisateur non connecté ou ids non renseignés");
         }
 
-        $retard=$this->emprunter->getRetard($user->idemprunteur);
+        $retard=$this->emprunter->infoRetard($user->idemprunteur);
 
-        //session_start();
-        //$_SESSION["dataRetard"]=$retard;
+        $nbRetard=$this->emprunter->getRetard($user->idemprunteur);
 
-        return Template::render("views/user/retard.php", array("user" => $user, "retard" => $retard), false);
+        return Template::render("views/user/retard.php", array("user" => $user, "retard" => $retard,"nbRetard"=>$nbRetard), false);
 
     }
 

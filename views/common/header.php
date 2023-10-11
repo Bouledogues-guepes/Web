@@ -27,7 +27,9 @@
             <li><a href="/horaires" class="text-gray-600 hover:text-gray-800">Horaires</a></li>
             <li><a href="/apropos" class="text-gray-600 hover:text-gray-800">À propos</a></li>
             <li>
-                <?php if (\utils\SessionHelpers::isLogin()) { ?>
+                <?php
+                //$user->prenomemprunteur
+                if (\utils\SessionHelpers::isLogin())  { ?>
                     <a href="/me" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
                         Mon compte
                     </a>
@@ -39,14 +41,25 @@
             </li>
             <li>
                 <?php
-                    if (\utils\SessionHelpers::isLogin()) {
+                    $nbRetard=$_SESSION["NBRETARD"];
+                    if (\utils\SessionHelpers::isLogin() and $nbRetard > 0 )  {
+
                         ?>
 
                     <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
                         <img src="../../../public/images/clocheNotif.png" class="w-8"/>
                     </button>
 
-                <?php
+                    <?php
+                    }
+                    else
+                    {
+
+                    ?>
+                    <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+                        <img src="../../../public/images/clochePasNotif.png" class="w-8"/>
+                    </button>
+                    <?php
                     }
                     ?>
             </li>
