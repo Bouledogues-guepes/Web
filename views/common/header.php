@@ -49,7 +49,7 @@
                     {
                         $nbRetard=-1;
                     }
-                    if (\utils\SessionHelpers::isLogin() and $nbRetard > 0 )  {
+                    if (\utils\SessionHelpers::isLogin() && $nbRetard > 0 )  {
 
                         ?>
 
@@ -61,13 +61,13 @@
                     }
                     else
                     {
-                        if (\utils\SessionHelpers::isLogin())
+                        if (\utils\SessionHelpers::isLogin() && ($nbRetard = 0 || $nbRetard = -1 ))
                         {
-                    ?>
-                    <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
-                        <img src="../../../public/images/clochePasNotif.png" class="w-8"/>
-                    </button>
-                    <?php
+                        ?>
+                        <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+                            <img src="../../../public/images/clochePasNotif.png" class="w-8"/>
+                        </button>
+                        <?php
                         }
                     }
                     ?>
