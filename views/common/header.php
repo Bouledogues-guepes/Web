@@ -41,7 +41,14 @@
             </li>
             <li>
                 <?php
-                    $nbRetard=$_SESSION["NBRETARD"];
+                    if (isset($_SESSION["NBRETARD"]))
+                    {
+                        $nbRetard=$_SESSION["NBRETARD"];
+                    }
+                    else
+                    {
+                        $nbRetard=-1;
+                    }
                     if (\utils\SessionHelpers::isLogin() and $nbRetard > 0 )  {
 
                         ?>
@@ -54,12 +61,14 @@
                     }
                     else
                     {
-
+                        if (\utils\SessionHelpers::isLogin())
+                        {
                     ?>
                     <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
                         <img src="../../../public/images/clochePasNotif.png" class="w-8"/>
                     </button>
                     <?php
+                        }
                     }
                     ?>
             </li>
