@@ -12,8 +12,6 @@ checkboxes.forEach((checkbox) => {
         const selectedCheckboxes = Array.from(checkboxes).filter((cb) => cb.checked);
         const selectedValues = selectedCheckboxes.map((cb) => cb.id);
 
-
-        // Construisez la nouvelle action du formulaire en ajoutant les valeurs sélectionnées
         const newAction = "/catalogue/" + selectedValues.join("&");
         form.action = newAction;
     });

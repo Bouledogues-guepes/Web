@@ -6,9 +6,9 @@
 
     <?php
 
-    if (isset($_SESSION["NBRETARD"])) {
-        \utils\SessionHelpers::NBRETARD(count($nbRetard));
-    }
+    \utils\SessionHelpers::NBRETARD(count($nbRetard));
+
+
     if (count($retard) > 0) {
         for ($i = 1; $i < count($retard) + 1; $i++) {
             ?>
@@ -32,6 +32,7 @@
 
         <?php
     }
+
     ?>
 
 </div>

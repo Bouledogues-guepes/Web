@@ -40,15 +40,16 @@
                 <?php } ?>
             </li>
             <li>
+
+                <script>
+                    fetch('/me/retard')
+                </script>
+
+
                 <?php
-                    if (isset($_SESSION["NBRETARD"]))
-                    {
-                        $nbRetard=$_SESSION["NBRETARD"];
-                    }
-                    else
-                    {
-                        $nbRetard=-1;
-                    }
+
+                    $nbRetard=$_SESSION["NBRETARD"];
+
                     if (\utils\SessionHelpers::isLogin() && $nbRetard > 0 )  {
 
                         ?>
@@ -68,6 +69,7 @@
                             <img src="../../../public/images/clochePasNotif.png" class="w-8"/>
                         </button>
                         <?php
+
                         }
                     }
                     ?>

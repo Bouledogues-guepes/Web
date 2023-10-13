@@ -41,7 +41,6 @@ $tel=$user->telportable;
                         if ($valeurDuCookie === "masquer") {
                             echo ' checked';
                         }
-
                         echo '>';?>
                         <label for="Masquer">Masquer le téléphone ?</label>
 
@@ -66,23 +65,23 @@ $tel=$user->telportable;
                     <script>
                         const downloadButton = document.getElementById("downloadButton");
 
-                        // Créez un gestionnaire d'événements pour le clic sur le bouton
+
                         downloadButton.addEventListener("click", function () {
-                        // Créez un objet JSON de données (remplacez cela par vos propres données)
+
                         const jsonData = {
-                        nom: "John",
-                        prenom: "Doe",
-                        email: "john.doe@example.com",
-                        // Ajoutez d'autres données ici...
+                        nom: "test",
+                        prenom: "test",
+                        email: "test.test@test.com",
+
                         };
 
-                        // Convertissez l'objet JSON en une chaîne JSON
+
                         const jsonString = JSON.stringify(jsonData, null, 2);
 
-                        // Créez un objet Blob à partir de la chaîne JSON
+
                         const blob = new Blob([jsonString], { type: "application/json" });
 
-                        // Générez une URL d'objet Blob pour le téléchargement
+
                         const url = URL.createObjectURL(blob);
 
                         // Créez un lien de téléchargement
