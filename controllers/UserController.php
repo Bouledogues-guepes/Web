@@ -271,4 +271,17 @@ class UserController extends WebController
 
     }
 
+    function infoUser():string
+    {
+        $user = SessionHelpers::getConnected();
+
+        if (!$user) {
+            die ("Erreur: utilisateur non connecté ou ids non renseignés");
+        }
+
+        $info=$this->emprunteur->getInfoEmprunteur($user->idemprunteur);
+
+        Template::render("views/user/download.php", ["info" => $info]);
+    }
+
 }

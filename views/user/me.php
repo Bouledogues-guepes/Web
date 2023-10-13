@@ -55,49 +55,20 @@ $tel=$user->telportable;
                         Déconnexion
                     </a>
 
+                    <a href="/me/download">
+
                     <button id="downloadButton" class="bg-indigo-200 text-white hover:bg-indigo-600 font-bold py-4 px-6 rounded-full ">
+
+
 
                         <div>
                             <img src="../../public/images/download.png" class="object-cover h-4 w-4">
                         </div>
+
+
                     </button>
+                    </a>
 
-                    <script>
-                        const downloadButton = document.getElementById("downloadButton");
-
-
-                        downloadButton.addEventListener("click", function () {
-
-                        const jsonData = {
-                        nom: "test",
-                        prenom: "test",
-                        email: "test.test@test.com",
-
-                        };
-
-
-                        const jsonString = JSON.stringify(jsonData, null, 2);
-
-
-                        const blob = new Blob([jsonString], { type: "application/json" });
-
-
-                        const url = URL.createObjectURL(blob);
-
-                        // Créez un lien de téléchargement
-                        const a = document.createElement("a");
-                        a.href = url;
-                        a.download = "donnees.json"; // Nom du fichier de téléchargement
-                        a.style.display = "none";
-
-                        // Ajoutez le lien au DOM et déclenchez le clic
-                        document.body.appendChild(a);
-                        a.click();
-
-                        // Supprimez le lien du DOM après le téléchargement
-                        document.body.removeChild(a);
-                        });
-                    </script>
                 </div>
             </div>
         </div>

@@ -53,6 +53,7 @@ class Web
             Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
 
             Route::Add('/me/retard',[$user,'getRetard']);
+            Route::Add('/me/download',[$user,'infoUser']);
         }
 
         // Route permettant l'accès au catalogue.
@@ -60,6 +61,8 @@ class Web
         Route::Add('/catalogue/{type}', [$catalogue, 'liste']);
 
         Route::Add('/apropos',[$catalogue,'apropos']);
+
+
     }
 }
 

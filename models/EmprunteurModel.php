@@ -3,6 +3,7 @@
 namespace models;
 
 use models\base\SQL;
+use stdClass;
 use utils\EmailUtils;
 use utils\SessionHelpers;
 use utils\TokenHelpers;
@@ -156,20 +157,19 @@ class EmprunteurModel extends SQL
         }
 
 
-
-
-
-        /**
-         * Rappel
-         *
-         * La validation du compte est un int qui prend plusieurs valeurs :
-         * 0 : Compte non validé
-         * 1 : email validé
-         * 2 : Compte validé par un admin
-         * 3 : Compte banni
-         * 4 : Compte supprimé
-         */
-
         return true;
+    }
+
+    public function getInfoEmprunteur($id): array|stdClass
+    {
+        $sql = 'SELECT nomemprunteur,prenomemprunteur,datenaissance,emailemprunteur,telportable, titre,datedebutemprunt,dateretour 
+FROM emprunteur inner join emprunter on emprunteur.idemprunteur=emprunter.idemprunteur
+    inner join ressource on emprunter.idressource = ressource.idressource 
+WHERE emprunteur.idemprunteur = ?';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$id]);
+        $user = $stmt->fetch(\PDO::FETCH_OBJ);
+        return $user;
+
     }
 }
