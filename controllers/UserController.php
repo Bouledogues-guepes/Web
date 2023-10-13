@@ -271,7 +271,7 @@ class UserController extends WebController
 
     }
 
-    function infoUser():string
+    function infoUser(): mixed
     {
         $user = SessionHelpers::getConnected();
 
@@ -281,7 +281,12 @@ class UserController extends WebController
 
         $info=$this->emprunteur->getInfoEmprunteur($user->idemprunteur);
 
-        Template::render("views/user/download.php", ["info" => $info]);
+
+        header('Content-disposition: attachment; filename=donnee.json');
+        header('Content-type: application/json');
+
+        echo json_encode($info);
+        return null;
     }
 
 }
