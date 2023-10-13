@@ -119,5 +119,16 @@ class EmprunterModel extends SQL
         }
     }
 
+    public function nombreEmprunt($idemprunteur): int|object
+    {
+        try {
+            $sql = 'SELECT count(*) as nb from emprunter where idemprunteur=? and EST_RENDU=0;';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idemprunteur]);
+            return $stmt->fetch(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return -1;
+        }
+    }
 
 }

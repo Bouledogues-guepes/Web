@@ -38,10 +38,10 @@ use utils\SessionHelpers;
                         if (SessionHelpers::isConnected()) {
 
                         ?>
-                        <button type="submit"
-                                class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
-                            Emprunter
-                        </button>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
+                                Emprunter
+                            </button>
                         <?php } ?>
                     </form>
 

@@ -208,6 +208,8 @@ class UserController extends WebController
         $idRessource = $_POST["idRessource"];
         $idExemplaire = $_POST["idExemplaire"];
 
+
+
         // Récupération de l'utilisateur connecté en SESSION.
         $user = SessionHelpers::getConnected();
 
@@ -217,26 +219,38 @@ class UserController extends WebController
         }
 
         // On déclare l'emprunt, et on redirige l'utilisateur vers sa page de profil
-        $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
-        $titre = $this->ressource->getLivreById($idRessource);
 
-        $emprunts = $this->emprunter->getLastEmpruntDuree($user->idemprunteur);
+        $nbEmprunt= $this->emprunter->nombreEmprunt( $user->idemprunteur);
 
-        EmailUtils::sendEmail($user->emailemprunteur, "Merci pour votre emprunt ! ", "aEmprunter",
-                array(
-                    "titre" => $titre,
-                    "nom" => $user->nomemprunteur,
-                    "prenom" => $user->prenomemprunteur,
-                    "debutemprunt" => $emprunts[0]->datedebutemprunt,
-                    "retouremprunt" => $emprunts[0]->dateretour
-                )
-            );
 
-        if ($result) {
+
+        if ($nbEmprunt->nb <3)
+        {
+            $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
+            $titre = $this->ressource->getLivreById($idRessource);
+
+            $emprunts = $this->emprunter->getLastEmpruntDuree($user->idemprunteur);
+
+            EmailUtils::sendEmail($user->emailemprunteur, "Merci pour votre emprunt ! ", "aEmprunter",
+                    array(
+                        "titre" => $titre,
+                        "nom" => $user->nomemprunteur,
+                        "prenom" => $user->prenomemprunteur,
+                        "debutemprunt" => $emprunts[0]->datedebutemprunt,
+                        "retouremprunt" => $emprunts[0]->dateretour
+                    )
+                );
+
+            if ($result) {
+                $this->redirect("/me");
+            } else {
+                // Gestion d'erreur à améliorer
+                die("Erreur lors de l'emprunt");
+            }
+        }
+        else
+        {
             $this->redirect("/me");
-        } else {
-            // Gestion d'erreur à améliorer
-            die("Erreur lors de l'emprunt");
         }
     }
 

@@ -74,6 +74,8 @@ class CatalogueController extends WebController
         $exemplaires = $this->exemplaireModel->getByRessource($id);
         $exemplaire = null;
 
+
+
         // Pour l'instant, on ne gère qu'un exemplaire par ressource.
         // Si on en trouve plusieurs, on prend le premier.
         if ($exemplaires && sizeof($exemplaires) > 0) {
