@@ -34,10 +34,10 @@
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">Modifier le mots de passe</h2>
                     <!-- Ajoutez ici les champs d'édition pour les informations personnelles -->
                     <!-- Par exemple : -->
-                    <input type="text" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
+                    <input type="password" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
                     <br>
-                    <input type="text" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">
-                    <input type="text" placeholder="Confirmation mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="confirmNewPassword">
+                    <input type="password" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">
+                    <input type="password" placeholder="Confirmation mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="confirmNewPassword">
 
                 </div>
 

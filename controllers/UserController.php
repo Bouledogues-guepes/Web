@@ -56,7 +56,7 @@ class UserController extends WebController
 
     function verifierMotDePasse($motDePasse) {
         // Vérifier la longueur du mot de passe
-        if (strlen($motDePasse) < 9) {
+        if (strlen($motDePasse) < 8) {
             return false;
         }
 
@@ -65,12 +65,17 @@ class UserController extends WebController
             return false;
         }
 
-        // Vérifier s'il y a au moins un caractère spécial
-        if (!preg_match('/[^A-Za-z0-9]/', $motDePasse)) {
-            return true;
+        // Vérifier s'il y a au moins un chiffre
+        if (!preg_match('/\d/', $motDePasse)) {
+            return false;
         }
 
-        return false;
+        // Vérifier s'il y a au moins un caractère spécial
+        if (!preg_match('/[^A-Za-z0-9]/', $motDePasse)) {
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -329,15 +334,20 @@ class UserController extends WebController
     function editUserPassword($currentPassword, $newPassword, $confirmNewPassword): void
     {
         $user = SessionHelpers::getConnected();
-        $mpd = $user->motpasseemprunteur;
-        if(password_verify($currentPassword, $mpd)){
+        $emprunteur = $this->emprunteur->getOne($user->idemprunteur);
+        $mdp = $emprunteur->motpasseemprunteur;
+        if(password_verify($currentPassword, $mdp)){
             if ($newPassword === $confirmNewPassword){
                 if($this->verifierMotDePasse($newPassword)){
-                    $this->emprunteur->modifyPassword($newPassword);
+                    $this->emprunteur->modifyPassword(password_hash($newPassword,PASSWORD_DEFAULT), $user->idemprunteur);
                 }
 
+
             }
+
         }
+        header("Location:/me");
+
     }
 
 }
