@@ -166,4 +166,8 @@ class EmprunteurModel extends SQL
         $user = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $user;
     }
+
+    public function modifyPassword($password){
+
+    }
 }

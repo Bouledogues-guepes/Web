@@ -202,7 +202,7 @@ class UserController extends WebController
      * Pour accéder à la page il faut également l'id de la ressource et l'id de l'exemplaire.
      * @return string
      */
-    function emprunter(): string
+    function emprunter(): void
     {
         // Id à emprunter
         $idRessource = $_POST["idRessource"];
@@ -299,6 +299,21 @@ class UserController extends WebController
     {
         $user = SessionHelpers::getConnected();
         return Template::render("views/user/edit.php", array("user" => $user));
+    }
+
+    function editUserInfo(): void
+    {
+
+    }
+    function editUserPassword($currentPassword, $newPassword, $confirmNewPassword): void
+    {
+        $user = SessionHelpers::getConnected();
+        $mpd = $user->motpasseemprunteur;
+        if(password_verify($currentPassword, $mpd)){
+            if ($newPassword === $confirmNewPassword){
+                $this->emprunteur->fn();
+            }
+        }
     }
 
 }
