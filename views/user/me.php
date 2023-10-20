@@ -16,7 +16,12 @@ $tel=$user->telportable;
                     <img src="<?= \utils\Gravatar::get_gravatar($user->emailemprunteur) ?>" alt="Photo de profil"
                          class="rounded-full h-32 w-32">
                 </div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-4">👋 <?= $user->prenomemprunteur ?></h1>
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-4">👋 <?= $user->prenomemprunteur ?></h1>
+                    <a href="/me/edit" class="ml-auto">
+                        <img src="../../public/images/editer.png" alt="Image" class="w-5 h-5">
+                    </a>
+                </div>
                 <div class="mb-4">
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">Informations personnelles </h2>
 
@@ -88,8 +93,11 @@ $tel=$user->telportable;
 
                     <!-- Liste des emprunts -->
                     <?php foreach ($emprunts as $emprunt) { ?>
+                    <a href="/catalogue/detail/<?=$emprunt->idressource?>">
                         <div class="bg-white shadow-lg rounded-lg px-6 py-4">
-                            <h2 class="text-xl font-semibold text-gray-800 mb-2"><?= $emprunt->titre ?></h2>
+
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2"><?= $emprunt->titre ?></h2>
+
                             <p class="text-gray-600 mb-2">Type: <span
                                         class="font-semibold"><?= $emprunt->libellecategorie ?></span></p>
                             <p class="text-gray-600 mb-2">
@@ -101,6 +109,7 @@ $tel=$user->telportable;
                                 <span class="font-semibold"><?= date_format(date_create($emprunt->dateretour), "d/m/Y") ?></span>
                             </p>
                         </div>
+                    </a>
                     <?php } ?>
                 </div>
             <?php } ?>

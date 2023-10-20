@@ -294,4 +294,11 @@ class UserController extends WebController
         return null;
     }
 
+
+    function editUser(): string
+    {
+        $user = SessionHelpers::getConnected();
+        return Template::render("views/user/edit.php", array("user" => $user));
+    }
+
 }

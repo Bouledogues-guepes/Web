@@ -54,6 +54,9 @@ class Web
 
             Route::Add('/me/retard',[$user,'getRetard']);
             Route::Add('/me/download',[$user,'infoUser']);
+            Route::Add('/me/edit',[$user,'editUser']);
+
+
         }
 
         // Route permettant l'accès au catalogue.
