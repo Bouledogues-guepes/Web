@@ -66,6 +66,8 @@ class CatalogueController extends WebController
         // Récupération de la ressource
         $ressource = $this->ressourceModel->getOne($id);
 
+        $commentaires=$this->ressourceModel->getCommentairesByid($id);
+
         if ($ressource == null) {
             $this->redirect("/");
         }
@@ -83,7 +85,7 @@ class CatalogueController extends WebController
         }
 
 
-        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire));
+        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires));
     }
 
     function apropos(): string

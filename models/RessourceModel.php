@@ -70,4 +70,13 @@ class RessourceModel extends SQL
             return null;
         }
     }
+
+    public function getCommentairesByid($id): array
+    {
+        $sql = 'SELECT * from commentaire where idressource = ?';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
 }

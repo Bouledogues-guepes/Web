@@ -29,23 +29,26 @@ use utils\SessionHelpers;
 
                 <!-- Bouton pour emprunter un exemplaire -->
                 <?php if ($exemplaire) { ?>
-
                     <form id="exemplaire" method="post" class="text-center pt-5 pb-3" action="/catalogue/emprunter">
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">
                         <?php
-
                         if (SessionHelpers::isConnected()) {
-
-                        ?>
+                            ?>
                             <button type="submit"
-                                    class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full">
                                 Emprunter
                             </button>
                         <?php } ?>
                     </form>
-
                 <?php } ?>
+                <?php
+                var_dump($commentaires);
+                foreach($commentaires as $value)
+                {
+                        echo $value->com;
+                }
+                ?>
             </div>
         </div>
     </div>

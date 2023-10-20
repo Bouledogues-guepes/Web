@@ -172,4 +172,5 @@ class EmprunteurModel extends SQL
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$password,$idEmprunteur]);
     }
+
 }

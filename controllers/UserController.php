@@ -44,7 +44,8 @@ class UserController extends WebController
      * @return string
      */
 
-    function VerifEmail($email) {
+    function VerifEmail($email)
+    {
         $pattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
 
         if (preg_match($pattern, $email)) {
