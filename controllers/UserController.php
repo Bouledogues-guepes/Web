@@ -279,8 +279,13 @@ class UserController extends WebController
             die ("Erreur: utilisateur non connecté ou ids non renseignés");
         }
 
-        $info=$this->emprunteur->getInfoEmprunteur($user->idemprunteur);
+        unset($user->motpasseemprunteur);
 
+        //$info=$this->emprunteur->getHistoriqueEmprunteur($user->idemprunteur);
+        $info=array(
+            "user" => $user,
+            "historique" => $this->emprunteur->getHistoriqueEmprunteur($user->idemprunteur)
+        );
 
         header('Content-disposition: attachment; filename=donnee.json');
         header('Content-type: application/json');

@@ -118,8 +118,4 @@ if (isset($_POST['Masquer'])) {
     $chemin = "/"; // Le cookie est disponible dans tout le domaine
     setcookie("masquerNumero", $valeurDuCookie, $duree, $chemin);
 }
-
-
-
-
 ?>

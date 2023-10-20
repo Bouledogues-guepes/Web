@@ -155,21 +155,15 @@ class EmprunteurModel extends SQL
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$uuid]);
         }
-
-
         return true;
     }
 
-    public function getInfoEmprunteur($id): array|stdClass
+    public function getHistoriqueEmprunteur($id):array|stdClass
     {
-        $sql = 'SELECT nomemprunteur,prenomemprunteur,datenaissance,emailemprunteur,telportable, titre,datedebutemprunt,dateretour 
-FROM emprunteur inner join emprunter on emprunteur.idemprunteur=emprunter.idemprunteur
-    inner join ressource on emprunter.idressource = ressource.idressource 
-WHERE emprunteur.idemprunteur = ?';
+        $sql = 'select ressource.titre as Titre, libellecategorie as Categorie, datedebutemprunt as Emprunt, dateretour as Retour, EST_RENDU as Rendu FROM emprunter inner join ressource on emprunter.idressource=ressource.idressource inner join categorie on categorie.idcategorie=ressource.idcategorie where emprunter.idemprunteur=?';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$id]);
-        $user = $stmt->fetch(\PDO::FETCH_OBJ);
+        $user = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $user;
-
     }
 }
