@@ -332,7 +332,10 @@ class UserController extends WebController
         $mpd = $user->motpasseemprunteur;
         if(password_verify($currentPassword, $mpd)){
             if ($newPassword === $confirmNewPassword){
-                $this->emprunteur->fn();
+                if($this->verifierMotDePasse($newPassword)){
+                    $this->emprunteur->modifyPassword($newPassword);
+                }
+
             }
         }
     }

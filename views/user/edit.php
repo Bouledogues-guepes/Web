@@ -24,30 +24,31 @@
         </div>
 
         <!-- Colonne du milieu -->
-        <form method="post" action="/me/edit/password">
 
-            <div class="w-full md:w-1/3 px-4">
-                <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg px-6 py-4">
 
-                    <div class="mb-4">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Modifier le mots de passe</h2>
-                        <!-- Ajoutez ici les champs d'édition pour les informations personnelles -->
-                        <!-- Par exemple : -->
-                        <input type="text" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
-                        <br>
-                        <input type="text" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">
-                        <input type="text" placeholder="Confirmation mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="confirmNewPassword">
+        <div class="w-full md:w-1/3 px-4">
+            <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg px-6 py-4">
+                <form method="post" action="/me/edit/password">
+                <div class="mb-4">
 
-                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Modifier le mots de passe</h2>
+                    <!-- Ajoutez ici les champs d'édition pour les informations personnelles -->
+                    <!-- Par exemple : -->
+                    <input type="text" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
+                    <br>
+                    <input type="text" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">
+                    <input type="text" placeholder="Confirmation mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="confirmNewPassword">
 
-                    <div class="p-5 text-center">
-                        <a class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2" href="/logout">
-                            Modifier
-                        </a>
-                    </div>
                 </div>
+
+                <div class="p-5 text-center">
+                    <input type="submit" value="Modifier" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2" >
+
+                </div>
+                </form>
             </div>
-        </form>
+        </div>
+
         <!-- Colonne de droite -->
         <div class="w-full md:w-1/3 px-4">
             <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg px-6 py-4">
