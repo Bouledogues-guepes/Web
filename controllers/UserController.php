@@ -54,6 +54,27 @@ class UserController extends WebController
         }
     }
 
+    function verifierMotDePasse($motDePasse) {
+        // Vérifier la longueur du mot de passe
+        if (strlen($motDePasse) < 9) {
+            return false;
+        }
+
+        // Vérifier s'il y a au moins une majuscule
+        if (!preg_match('/[A-Z]/', $motDePasse)) {
+            return false;
+        }
+
+        // Vérifier s'il y a au moins un caractère spécial
+        if (!preg_match('/[^A-Za-z0-9]/', $motDePasse)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
 
     function login(): string
     {
