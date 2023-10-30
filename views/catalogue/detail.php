@@ -42,13 +42,11 @@ use utils\SessionHelpers;
                         <?php } ?>
                     </form>
                 <?php } ?>
-                <?php
-                var_dump($commentaires);
-                foreach($commentaires as $value)
-                {
-                        echo $value->com;
-                }
-                ?>
+                <?php foreach($commentaires as $value) { ?>
+                    <div class="bg-gray-200 p-4 mb-2">
+                        <?= $value->com ?>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>
