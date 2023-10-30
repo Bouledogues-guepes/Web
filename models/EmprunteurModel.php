@@ -163,8 +163,7 @@ class EmprunteurModel extends SQL
         $sql = 'select ressource.titre as Titre, libellecategorie as Categorie, datedebutemprunt as Emprunt, dateretour as Retour, EST_RENDU as Rendu FROM emprunter inner join ressource on emprunter.idressource=ressource.idressource inner join categorie on categorie.idcategorie=ressource.idcategorie where emprunter.idemprunteur=?';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$id]);
-        $user = $stmt->fetchAll(\PDO::FETCH_OBJ);
-        return $user;
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function modifyPassword($password,$idEmprunteur){
@@ -172,5 +171,7 @@ class EmprunteurModel extends SQL
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$password,$idEmprunteur]);
     }
+
+
 
 }

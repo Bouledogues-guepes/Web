@@ -73,7 +73,7 @@ class RessourceModel extends SQL
 
     public function getCommentairesByid($id): array
     {
-        $sql = 'SELECT * from commentaire where idressource = ?';
+        $sql = 'SELECT idcom,com,noteCom,datecom,idressource, nomemprunteur,prenomemprunteur,emailemprunteur from commentaire inner join emprunteur on commentaire.idemprunteur=emprunteur.idemprunteur where idressource = ?';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);

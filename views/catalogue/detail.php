@@ -17,6 +17,7 @@ use utils\SessionHelpers;
 
         <!-- Colonne de droite -->
         <div class="w-full md:w-1/2 px-4 mt-6 md:mt-0">
+
             <div class="bg-white shadow-lg rounded-lg px-6 py-4">
                 <h1 class="text-3xl font-bold text-gray-900 mb-4"><?= $ressource->titre ?></h1>
                 <p class="text-gray-600 mb-2">Année de publication: <span
@@ -42,11 +43,36 @@ use utils\SessionHelpers;
                         <?php } ?>
                     </form>
                 <?php } ?>
+                <div class="bg-gray-200 p-4 mb-2 rounded-lg">
+                <h1 class="text-xl font-bold text-gray-900 mb-4">Commentaires</h1>
                 <?php foreach($commentaires as $value) { ?>
-                    <div class="bg-gray-200 p-4 mb-2">
-                        <?= $value->com ?>
-                    </div>
+
+
+                        <div class="bg-white p-4 mb-2 rounded-lg">
+
+                            <p class="text-gray-600 mb-2"><span class="font-semibold"><?= $value->nomemprunteur." ".$value->prenomemprunteur ?></span></p>
+                            <?php
+                            $noteCom = $value->noteCom;
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= $noteCom) {
+                                    echo '<span class="text-yellow-500">&#9733;</span>';
+                                } else {
+                                    echo '<span class="text-gray-500">&#9733;</span>';
+                                }
+                            }
+                            ?>
+
+
+                            <br>
+
+                            <p class="text-gray-600 mb-2 text-xs"><span class="font-semibold"><?= $value->datecom ?></span></p>
+
+                            <p class="text-gray-600 mb-2"><span class="font-semibold"><?= $value->com ?></span></p>
+
+                        </div>
+
                 <?php } ?>
+                </div>
             </div>
         </div>
     </div>

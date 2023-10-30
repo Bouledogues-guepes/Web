@@ -68,6 +68,9 @@ class CatalogueController extends WebController
 
         $commentaires=$this->ressourceModel->getCommentairesByid($id);
 
+        //$users=$this->EmprunteurModel->
+
+
         if ($ressource == null) {
             $this->redirect("/");
         }
