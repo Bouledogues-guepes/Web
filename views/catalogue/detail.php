@@ -39,17 +39,35 @@ use utils\SessionHelpers;
                             <button type="submit"
                                     class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full">
                                 Emprunter
-                            </button>
+                            </button><br><br>
                         <?php } ?>
                     </form>
                 <?php } ?>
                 <div class="bg-gray-200 p-4 mb-2 rounded-lg">
-                <h1 class="text-xl font-bold text-gray-900 mb-4">Commentaires</h1>
-                <?php foreach($commentaires as $value) { ?>
+                    <div class="flex justify-between items-center mb-4">
+                        <h1 class="text-xl font-bold text-gray-900">Commentaires</h1>
+                        <?php if (SessionHelpers::isConnected()) {?>
+
+                                <form id="addCom" method="post" action ="/catalogue/detail/commentaire/<?=$ressource->idressource?>">
+
+                                    <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded">+</button>
+                                    <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
+
+                                </form>
+                        <?php } ?>
+                    </div>
+                    <?php
+                    if ($commentaires==null)
+                    {
+                        ?> <p class="text-gray-600 mb-2"><span class="font-semibold">Aucun commentaires n'a été déposé</span></p> <?php
+                    }
+                    else
+                    {
+                    foreach($commentaires as $value) { ?>
 
 
                         <div class="bg-white p-4 mb-2 rounded-lg">
-
+                            <img src="<?= \utils\Gravatar::get_gravatar($value->emailemprunteur) ?>" alt="Photo de profil" class="rounded-full h-14 w-14">
                             <p class="text-gray-600 mb-2"><span class="font-semibold"><?= $value->nomemprunteur." ".$value->prenomemprunteur ?></span></p>
                             <?php
                             $noteCom = $value->noteCom;
@@ -67,11 +85,13 @@ use utils\SessionHelpers;
 
                             <p class="text-gray-600 mb-2 text-xs"><span class="font-semibold"><?= $value->datecom ?></span></p>
 
-                            <p class="text-gray-600 mb-2"><span class="font-semibold"><?= $value->com ?></span></p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold"><i><?= $value->com ?></i></span></p>
 
                         </div>
 
-                <?php } ?>
+                    <?php }} ?>
+
+
                 </div>
             </div>
         </div>

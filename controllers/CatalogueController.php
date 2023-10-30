@@ -6,6 +6,7 @@ use controllers\base\WebController;
 use models\ExemplaireModel;
 use models\RessourceModel;
 use models\CategorieModel;
+use utils\SessionHelpers;
 use utils\Template;
 
 class CatalogueController extends WebController
@@ -68,9 +69,6 @@ class CatalogueController extends WebController
 
         $commentaires=$this->ressourceModel->getCommentairesByid($id);
 
-        //$users=$this->EmprunteurModel->
-
-
         if ($ressource == null) {
             $this->redirect("/");
         }
@@ -95,4 +93,31 @@ class CatalogueController extends WebController
     {
         return Template::render("views/apropos/apropos.php");
     }
+
+
+    function ajoutCom():string
+    {
+        return Template::render("views/catalogue/addCom.php");
+    }
+
+    function addCom():bool
+    {
+        $com=$_POST["comment"];
+        $note=$_POST["rating"];
+
+        $user = SessionHelpers::getConnected();
+        $idemprunteur=$user->idemprunteur;
+
+        $idressource=$_POST["idRessource"];
+
+        $this->ressourceModel->addCommentaireOnId($com,$note,$idemprunteur,$idressource);
+
+
+        header("Location:/catalogue/detail/$idressource");
+        return true;
+
+    }
+
+
+
 }

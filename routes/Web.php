@@ -57,11 +57,14 @@ class Web
             Route::Add('/me/edit',[$user,'editUser']);
             Route::Add('/me/edit/info',[$user,'editUserInfo']);
             Route::Add('/me/edit/password',[$user,'editUserPassword']);
-
+            Route::Add('/catalogue/detail/commentaire/{id}',[$catalogue,'ajoutCom']);
+            Route::Add('/catalogue/detail/add/{id}',[$catalogue,'addCom']);
 
         }
 
         // Route permettant l'accès au catalogue.
+
+
         Route::Add('/catalogue/detail/{id}', [$catalogue, 'detail']);
         Route::Add('/catalogue/{type}', [$catalogue, 'liste']);
 

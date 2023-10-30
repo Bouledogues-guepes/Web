@@ -2,6 +2,7 @@
 namespace models;
 
 use models\base\SQL;
+use utils\SessionHelpers;
 
 class RessourceModel extends SQL
 {
@@ -78,5 +79,19 @@ class RessourceModel extends SQL
         $stmt->execute([$id]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function addCommentaireOnId($commentaire,$note,$user,$ressource) : bool
+    {
+        try {
+            $sql = "INSERT INTO `commentaire` (`idcom`, `com`, `noteCom`, `idemprunteur`, `datecom`, `idressource`) VALUES (NULL, ?, ?, ?, CURRENT_DATE(),?)";
+            $stmt = parent::getPdo()->prepare($sql);
+
+            return $stmt->execute([ $commentaire,$note,$user,$ressource]);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+
 
 }
