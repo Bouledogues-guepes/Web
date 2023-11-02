@@ -328,9 +328,12 @@ class UserController extends WebController
         return Template::render("views/user/edit.php", array("user" => $user));
     }
 
-    function editUserInfo(): void
+    function editUserInfo($newName, $newPname, $newDateN, $newEmail, $newTel): void
     {
-
+        $user = SessionHelpers::getConnected();
+        $idUser=$user->idemprunteur;
+        $this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel);
+        header("Location:/me");
     }
     function editUserPassword($currentPassword, $newPassword, $confirmNewPassword): void
     {
