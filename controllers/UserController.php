@@ -339,6 +339,9 @@ class UserController extends WebController
             $_SESSION['LOGIN']->emailemprunteur=$newEmail;
             $_SESSION['LOGIN']->telportable=$newTel;
         }
+
+        //SessionHelpers::login();
+
         header("Location:/me");
     }
     function editUserPassword($currentPassword, $newPassword, $confirmNewPassword): void
