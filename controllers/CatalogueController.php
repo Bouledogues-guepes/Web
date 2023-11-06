@@ -105,15 +105,19 @@ class CatalogueController extends WebController
         $com=$_POST["comment"];
         $note=$_POST["rating"];
 
+
+        // Filtrage pour eviter les failles XSS
+        $cleanText = strip_tags(htmlspecialchars($com));
+
         $user = SessionHelpers::getConnected();
         $idemprunteur=$user->idemprunteur;
 
         $idressource=$_POST["idRessource"];
 
-        $this->ressourceModel->addCommentaireOnId($com,$note,$idemprunteur,$idressource);
+        $this->ressourceModel->addCommentaireOnId($cleanText,$note,$idemprunteur,$idressource);
 
 
-        header("Location:/catalogue/detail/$idressource");
+        header("Location: /catalogue/detail/$idressource?commentAdded=true");
         return true;
 
     }

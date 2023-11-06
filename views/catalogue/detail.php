@@ -56,6 +56,9 @@ use utils\SessionHelpers;
                                 </form>
                         <?php } ?>
                     </div>
+                    <div id="confirmationDiv" class="hidden bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mt-2">
+                        Votre commentaire a été ajouté avec succès. Merci !
+                    </div>
                     <?php
                     if ($commentaires==null)
                     {
@@ -116,5 +119,14 @@ use utils\SessionHelpers;
             e.target.submit()
         }
     });
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("commentAdded")) {
+        // Afficher la div de confirmation
+        const confirmationDiv = document.getElementById("confirmationDiv");
+        confirmationDiv.classList.remove("hidden");
+        history.replaceState({}, document.title, window.location.pathname);
+    }
 
 </script>

@@ -12,20 +12,25 @@
                     Le commentaire n'est pas valide. Merci de le modifier
                 </div>
 
+                <div class="hidden bg-red-400 text-white font-bold py-2 px-4 rounded-full mt-2" id="errorDivTaille">
+                    Le commentaire n'est pas assez grand. Merci de le modifier
+                </div>
+
 
                 <input type="hidden" name="idRessource" value="<?=$_POST["idRessource"]?>">
             </div>
 
+
             <div class="mb-4">
-                <label for="rating">Note (de 0 à 5 étoiles)</label>
-                <select id="rating" name="rating" class="w-full p-2 border rounded" required">
-                <option value="0">☆☆☆☆☆</option>
-                <option value="1">★☆☆☆☆</option>
-                <option value="2">★★☆☆☆</option>
-                <option value="3">★★★☆☆</option>
-                <option value="4">★★★★☆</option>
-                <option value="5">★★★★★</option>
-                </select>
+                <label for="rating">Note (de 1 à 5 étoiles)</label>
+                <div class="rating">
+                    <span class="star text-2xl" data-value="1" data-selected="true">☆</span>
+                    <span class="star text-2xl" data-value="2">☆</span>
+                    <span class="star text-2xl" data-value="3">☆</span>
+                    <span class="star text-2xl" data-value="4">☆</span>
+                    <span class="star text-2xl" data-value="5">☆</span>
+                </div>
+                <input id="rating" name="rating" type="hidden" required>
             </div>
 
             <div class="text-center">
@@ -36,9 +41,47 @@
     </div>
 </div>
 
+<style>
+    .star {
+        color: black; /*non sélectionnées*/
+    }
+
+    .selected {
+        color: gold; /* sélectionnées */
+    }
+</style>
+
 
 <script>
-    // Liste de mots interdits sous forme d'expressions régulières
+    const stars = document.querySelectorAll(".star");
+    const ratingInput = document.getElementById("rating");
+
+    stars.forEach(star => {
+        star.addEventListener("click", () => {
+            const value = star.getAttribute("data-value");
+            ratingInput.value = value;
+            updateStars(value);
+        });
+    });
+    const selectedStar = document.querySelector(".star[data-selected='true']");
+    if (selectedStar) {
+        const value = selectedStar.getAttribute("data-value");
+        updateStars(value);
+    }
+
+    function updateStars(value) {
+        stars.forEach(star => {
+            if (star.getAttribute("data-value") <= value) {
+                star.textContent = "★";
+                star.classList.add("selected");
+            } else {
+                star.textContent = "★";
+                star.classList.remove("selected");
+            }
+        });
+    }
+
+    //Liste mots interdits
     const motInterdits = [/à chier/i, /à couilles rabattues/i, /à deux trois poils de cul/i, /à la con/i, /à la mords-moi/i, /à la mords-moi-le-nœud/i,
         /à la roule-moi les couilles dans la laitue/i, /à un poil de cul/i, /agacer le sous-préfet/i, /alibofi/i, /aller aux putes/i, /aller chier dans sa caisse/i,
         /aller libérer Mandela/i, /aller niquer sa mère/i, /aller se faire empapaouter/i, /aller se faire enculer/i, /aller se faire foutre/i, /aller se faire mettre/i,
@@ -151,6 +194,11 @@ document.querySelector("form").addEventListener("submit", function(event) {
     if (ContenirMotInterdits) {
         event.preventDefault();
         document.getElementById("errorDiv").classList.remove("hidden");
+    }
+    if (comment.length<20)
+    {
+        event.preventDefault();
+        document.getElementById("errorDivTaille").classList.remove("hidden");
     }
 });
 </script>
