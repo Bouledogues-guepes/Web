@@ -332,7 +332,13 @@ class UserController extends WebController
     {
         $user = SessionHelpers::getConnected();
         $idUser=$user->idemprunteur;
-        $this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel);
+        if ($this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel)){
+            $_SESSION['LOGIN']->nomemprunteur=$newName;
+            $_SESSION['LOGIN']->prenomemprunteur=$newPname;
+            $_SESSION['LOGIN']->datenaissance=$newDateN;
+            $_SESSION['LOGIN']->emailemprunteur=$newEmail;
+            $_SESSION['LOGIN']->telportable=$newTel;
+        }
         header("Location:/me");
     }
     function editUserPassword($currentPassword, $newPassword, $confirmNewPassword): void

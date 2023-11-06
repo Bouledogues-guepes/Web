@@ -170,7 +170,7 @@ class EmprunteurModel extends SQL
 
         $sql = 'UPDATE emprunteur SET nomemprunteur = ?, prenomemprunteur = ?, datenaissance = ?, emailemprunteur = ?, telportable = ? WHERE idemprunteur= ?';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute([$newName, $newPname, $newDateN, $newEmail, $newTel, $idUser]);
+        return $stmt->execute([$newName, $newPname, $newDateN, $newEmail, $newTel, $idUser]);
     }
 
     public function modifyPassword($password,$idEmprunteur){
