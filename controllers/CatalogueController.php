@@ -3,6 +3,7 @@
 namespace controllers;
 
 use controllers\base\WebController;
+use models\EmprunterModel;
 use models\ExemplaireModel;
 use models\RessourceModel;
 use models\CategorieModel;
@@ -16,12 +17,14 @@ class CatalogueController extends WebController
     private ExemplaireModel $exemplaireModel;
 
     private CategorieModel $categorieModel;
+    private EmprunterModel $emprunterModel;
 
     function __construct()
     {
         $this->ressourceModel = new RessourceModel();
         $this->exemplaireModel = new ExemplaireModel();
         $this->categorieModel = new CategorieModel();
+        $this->emprunterModel = new EmprunterModel();
     }
 
     /**
@@ -79,14 +82,31 @@ class CatalogueController extends WebController
 
 
 
+
+
+
         // Pour l'instant, on ne gère qu'un exemplaire par ressource.
         // Si on en trouve plusieurs, on prend le premier.
         if ($exemplaires && sizeof($exemplaires) > 0) {
             $exemplaire = $exemplaires[0];
         }
 
+        if (SessionHelpers::isConnected())
+        {
+            $user = SessionHelpers::getConnected();
+            $idRessourceLu=$this->emprunterModel->ressourceDejaLu($user->idemprunteur);
 
-        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires));
+            foreach ($idRessourceLu as $idRessource)
+            {
+                if ( $idRessource->idressource == $id)
+                {
+                    return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"true"));
+                }
+            }
+
+
+        }
+        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"false"));
     }
 
     function apropos(): string
@@ -109,16 +129,26 @@ class CatalogueController extends WebController
         // Filtrage pour eviter les failles XSS
         $cleanText = strip_tags(htmlspecialchars($com));
 
+
         $user = SessionHelpers::getConnected();
         $idemprunteur=$user->idemprunteur;
 
+        $idRessourceLu=$this->emprunterModel->ressourceDejaLu($idemprunteur);
+
         $idressource=$_POST["idRessource"];
 
-        $this->ressourceModel->addCommentaireOnId($cleanText,$note,$idemprunteur,$idressource);
 
-
-        header("Location: /catalogue/detail/$idressource?commentAdded=true");
-        return true;
+        foreach ($idRessourceLu as $id)
+        {
+            if ( $id->idressource == $idressource)
+            {
+                $this->ressourceModel->addCommentaireOnId($cleanText,$note,$idemprunteur,$idressource);
+                header("Location: /catalogue/detail/$idressource?commentAdded=true");
+                return true;
+            }
+        }
+        header("Location: /catalogue/detail/$idressource?commentAdded=false");
+        return false;
 
     }
 

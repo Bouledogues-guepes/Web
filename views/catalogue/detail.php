@@ -1,7 +1,6 @@
 <?php
 
 use utils\SessionHelpers;
-
 ?>
 
 
@@ -49,8 +48,15 @@ use utils\SessionHelpers;
                         <?php if (SessionHelpers::isConnected()) {?>
 
                                 <form id="addCom" method="post" action ="/catalogue/detail/commentaire/<?=$ressource->idressource?>">
-
-                                    <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded">+</button>
+                                    <?php
+                                    if ($dejaLu=="false")
+                                    {?>
+                                    <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded opacity-50" disabled>+</button>
+                                    <?php }
+                                    else
+                                    {?>
+                                        <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded" >+</button>
+                                    <?php } ?>
                                     <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
 
                                 </form>
@@ -59,6 +65,11 @@ use utils\SessionHelpers;
                     <div id="confirmationDiv" class="hidden bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mt-2">
                         Votre commentaire a été ajouté avec succès. Merci !
                     </div>
+
+                    <div id="erreurDiv" class="hidden bg-red-400 text-white font-bold py-2 px-4 rounded-full mt-2">
+                        Vous devez avoir lu le livre pour publier un commentaire. Merci quand même !
+                    </div>
+
                     <?php
                     if ($commentaires==null)
                     {
@@ -120,12 +131,17 @@ use utils\SessionHelpers;
         }
     });
 
-
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("commentAdded")) {
-        // Afficher la div de confirmation
+
+    if (urlParams.get("commentAdded") === "true") {
         const confirmationDiv = document.getElementById("confirmationDiv");
         confirmationDiv.classList.remove("hidden");
+        history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    if (urlParams.get("commentAdded") === "false") {
+        const erreurDiv = document.getElementById("erreurDiv");
+        erreurDiv.classList.remove("hidden");
         history.replaceState({}, document.title, window.location.pathname);
     }
 
