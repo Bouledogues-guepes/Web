@@ -27,30 +27,36 @@ $tel=$user->telportable;
 
 
                     <p class="text-gray-600 mb-2"><span
-                                class="font-semibold">Email:</span> <?= $user->emailemprunteur ?></p>
-                    <p class="text-gray-600 mb-2"><span class="font-semibold">Nom:</span> <?= $user->nomemprunteur ?>
+                                class="font-bold">Email:</span> <?= $user->emailemprunteur ?></p>
+                    <p class="text-gray-600 mb-2"><span class="font-bold">Nom:</span> <?= $user->nomemprunteur ?>
                     </p>
                     <p class="text-gray-600 mb-2"><span
-                                class="font-semibold">Prénom:</span> <?= $user->prenomemprunteur ?></p>
+                                class="font-bold">Prénom:</span> <?= $user->prenomemprunteur ?></p>
 
-                    <div>
-                        <p class="text-gray-600 mb-2" id="telAmasquer"><span
-                                    class="font-semibold">Téléphone:</span> <?= $user->telportable ?></p>
-                        <?php
-                        $valeurDuCookie = isset($_COOKIE['masquerNumero']) ? $_COOKIE['masquerNumero'] : "";
+                    <?php
+                    if (isset($_POST['acceptConditions'])) {
+                        $valeurDuFormulaire = $_POST['acceptConditions'];
+                        setcookie("masquerNumero", $valeurDuFormulaire, time() + 30 * 24 * 60 * 60, "/");
 
-                        // Génération du code HTML du formulaire
-                        echo '<input type="checkbox" id="checkbox" name="Masquer"';
 
-                        // Si le cookie a la valeur "masquer", cochez la case à cocher par défaut
-                        if ($valeurDuCookie === "masquer") {
-                            echo ' checked';
+                        header("Location: " . $_SERVER['REQUEST_URI'] . "?cachebuster=" . time());
+                        exit;
+                    }
+
+                    $valeurDuCookie = isset($_COOKIE['masquerNumero']) ? $_COOKIE['masquerNumero'] : "";
+
+                    if ($valeurDuCookie === "non") {
+                        echo '<div><p class="text-gray-600 mb-2" id="telAmasquer"><span class="font-bold">Téléphone:</span> ** ** ** ** **</p></div>';
+                    } else {
+                        echo '<div><p class="text-gray-600 mb-2" id="telAmasquer"><span class="font-bold">Téléphone:</span> ' . $user->telportable . '</p></div>';
+                    }
+                    ?>
+                    <script>
+                        if (window.location.search.indexOf("cachebuster=") !== -1) {
+                            const newURL = window.location.href.replace(/\?cachebuster=\d+/, '');
+                            window.history.replaceState({}, document.title, newURL);
                         }
-                        echo '>';?>
-                        <label for="Masquer">Masquer le téléphone ?</label>
-
-
-                    </div>
+                    </script>
 
 
                 </div>
@@ -118,13 +124,3 @@ $tel=$user->telportable;
 </div>
 
 <script src="../../public/js/masquerLeTelephone.js"></script>
-
-<?php
-
-if (isset($_POST['Masquer'])) {
-    $valeurDuCookie = "masquer";
-    $duree = time() + 30 * 24 * 60 * 60; // Expire dans 30 jours
-    $chemin = "/"; // Le cookie est disponible dans tout le domaine
-    setcookie("masquerNumero", $valeurDuCookie, $duree, $chemin);
-}
-?>

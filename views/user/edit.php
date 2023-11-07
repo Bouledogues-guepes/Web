@@ -31,7 +31,7 @@
                 <form method="post" action="/me/edit/password">
                 <div class="mb-4">
 
-                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Modifier le mots de passe</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2 ">Modifier le mots de passe</h2>
                     <!-- Ajoutez ici les champs d'édition pour les informations personnelles -->
                     <!-- Par exemple : -->
                     <input type="password" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
@@ -55,19 +55,21 @@
                 <div class="mb-4">
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">Préférences</h2>
                     <div class="mt-2">
-                        <label class="block text-gray-700">Affichez le téléphone</label>
-                        <input type="radio" name="acceptConditions" value="oui" class="mr-1"> Oui
-                        <input type="radio" name="acceptConditions" value="non" class="ml-4 mr-1"> Non
+                        <form method="post" action="/me">
+                            <div class="border p-4 rounded-lg">
+                                <label class="block text-gray-700">Affichez le téléphone</label>
+                                <input type="radio" name="acceptConditions" value="oui" class="mr-1" required> Oui
+                                <input type="radio" name="acceptConditions" value="non" class="ml-4 mr-1" required> Non
+                            </div>
+                            <div class="p-5 text-center">
+                                <button type="submit" name="modification" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2">Modifier</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
-
-                <div class="p-5 text-center">
-                    <a class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2" href="/logout">
-                        Modifier
-                    </a>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
