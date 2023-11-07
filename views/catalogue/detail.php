@@ -1,6 +1,30 @@
 <?php
 
 use utils\SessionHelpers;
+
+$moyenne=0;
+foreach($commentaires as $value)
+{
+    $moyenne+=$value->noteCom;
+}
+if (count($commentaires) > 0) {
+    $moyenne /= count($commentaires);
+}
+
+$langue=$ressource->langue;
+
+
+//si besoin récupérer les lettres perso sur : https://www.messletters.com/fr/
+if($langue =="fr")
+{
+    $langue="🅵🆁";
+}
+
+if($langue=="en")
+{
+    $langue="🅴🅽";
+}
+
 ?>
 
 
@@ -19,9 +43,18 @@ use utils\SessionHelpers;
 
             <div class="bg-white shadow-lg rounded-lg px-6 py-4">
                 <h1 class="text-3xl font-bold text-gray-900 mb-4"><?= $ressource->titre ?></h1>
+                <p class="text-gray-600 mb-2">Note moyenne ≈ <span class="font-semibold">
+                        <?php
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= round($moyenne,0)) {
+                                echo '<span class="text-yellow-500">&#9733;</span>';
+                            } else {
+                                echo '<span class="text-gray-500">&#9733;</span>';
+                            }
+                        } ?></span></p>
                 <p class="text-gray-600 mb-2">Année de publication: <span
                             class="font-semibold"><?= $ressource->anneesortie ?></span></p>
-                <p class="text-gray-600 mb-2">Langue : <span class="font-semibold"><?= $ressource->langue ?></span></p>
+                <p class="text-gray-600 mb-2">Langue : <span class="font-semibold"><?= $langue ?></span></p>
                 <p class="text-gray-600 mb-2">ISBN : <span class="font-semibold"><?= $ressource->isbn ?></span></p>
                 <p class="text-gray-600 mb-2">Description: <span class="font-semibold">
                         <?= $ressource->description ?>

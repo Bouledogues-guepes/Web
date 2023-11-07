@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,8 +31,8 @@
                 <?php
                 //$user->prenomemprunteur
                 if (\utils\SessionHelpers::isLogin())  { ?>
-                    <a href="/me" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
-                        Mon compte
+                    <a href="/me" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full w-100 h-100">
+                        Mon Compte
                     </a>
                 <?php } else { ?>
                     <a href="/login" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
@@ -55,7 +56,7 @@
 
                         ?>
 
-                    <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+                    <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded mt-1">
                         <img src="../../../public/images/clocheNotif.png" class="w-8"/>
                     </button>
 
@@ -66,7 +67,7 @@
                         if (\utils\SessionHelpers::isLogin() && ($nbRetard = 0 || $nbRetard = -1 ))
                         {
                         ?>
-                        <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+                        <button id="boutonAfficherMasquer" class=" hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded mt-1">
                             <img src="../../../public/images/clochePasNotif.png" class="w-8"/>
                         </button>
                         <?php
