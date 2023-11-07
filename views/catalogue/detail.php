@@ -51,11 +51,11 @@ use utils\SessionHelpers;
                                     <?php
                                     if ($dejaLu=="false")
                                     {?>
-                                    <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded opacity-50" disabled>+</button>
+                                    <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded opacity-50" title="Vous devez avoir lu le livre pour ajouter un commentaire" disabled >💬</button>
                                     <?php }
                                     else
                                     {?>
-                                        <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded" >+</button>
+                                        <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded" title="Ajouter un commentaire" >💬</button>
                                     <?php } ?>
                                     <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
 

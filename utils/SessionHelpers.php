@@ -42,6 +42,15 @@ class SessionHelpers
         return isset($_SESSION['LOGIN']);
     }
 
+    static function setLogin($newName,$newPname,$newDateN,$newEmail,$newTel): void
+    {
+        $_SESSION['LOGIN']->nomemprunteur=$newName;
+        $_SESSION['LOGIN']->prenomemprunteur=$newPname;
+        $_SESSION['LOGIN']->datenaissance=$newDateN;
+        $_SESSION['LOGIN']->emailemprunteur=$newEmail;
+        $_SESSION['LOGIN']->telportable=$newTel;
+    }
+
 
     public static function isConnected(): bool
     {
