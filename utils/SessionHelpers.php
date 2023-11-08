@@ -21,11 +21,18 @@ class SessionHelpers
     static function login(mixed $user): void
     {
         $_SESSION['LOGIN'] = $user;
+
+        if($user->validationcompte == 9)
+        {
+            $_SESSION['isAdmin']=True;
+        }
+
     }
 
     static function logout(): void
     {
         unset($_SESSION['LOGIN']);
+        unset($_SESSION['isAdmin']);
     }
 
     static function getConnected(): mixed
@@ -49,6 +56,11 @@ class SessionHelpers
         $_SESSION['LOGIN']->datenaissance=$newDateN;
         $_SESSION['LOGIN']->emailemprunteur=$newEmail;
         $_SESSION['LOGIN']->telportable=$newTel;
+    }
+
+    static function isAdmin(): bool
+    {
+        return isset($_SESSION["isAdmin"]);
     }
 
 

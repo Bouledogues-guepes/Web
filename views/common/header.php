@@ -77,7 +77,7 @@
                     ?>
             </li>
 
-            <div id="maDiv" class="hidden absolute z-50 bg-indigo-600 p-4 mt-16 rounded shadow-lg w-auto h-auto right-16" >
+            <div id="maDiv" class="hidden absolute z-50 bg-indigo-600 border border-black p-4 mt-16 rounded shadow-lg w-auto h-auto right-16">
             </div>
 
             <script>

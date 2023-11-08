@@ -21,8 +21,8 @@ class Web
 
         // Appel la méthode « home » dans le contrôleur $main.
         Route::Add('/', [$main, 'home']);
-        Route::Add('/exemple', [$main, 'exemple']);
-        Route::Add('/exemple2/{parametre}', [$main, 'exemple']);
+//        Route::Add('/exemple', [$main, 'exemple']);
+//        Route::Add('/exemple2/{parametre}', [$main, 'exemple']);
 
 
 
@@ -32,7 +32,7 @@ class Web
         Route::Add('/horaires', fn() => Template::render('views/global/horaires.php'));
 
         // Routes permettant l'accès à la documentation de l'API.
-        Route::Add('/api', [$apidoc, 'liste']);
+
 
         // Routes permettant la gestion de l'authentification.
         Route::Add('/login', [$user, 'login']);
@@ -62,6 +62,10 @@ class Web
 
         }
 
+        if ( SessionHelpers::isAdmin())
+        {
+            Route::Add('/api', [$apidoc, 'liste']);
+        }
         // Route permettant l'accès au catalogue.
 
 

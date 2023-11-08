@@ -86,11 +86,11 @@ class UserController extends WebController
     {
         $data = array();
 
-        // Si l'utilisateur est déjà connecté, on le redirige vers sa page de profil
+        //validationcompte
+        // 1  = actif
+        // 2 = validé par admin
+        // 9 = développeur
 
-
-
-        // Gestion de la connexion
         if (isset($_POST["email"]) && isset($_POST["password"]))
         {
 
@@ -99,7 +99,7 @@ class UserController extends WebController
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
 
-            if ($result && ($validationcompte==1 || $validationcompte==2)) {
+            if ($result && ($validationcompte==1 || $validationcompte==2 || $validationcompte==9)) {
                 $this->redirect("/me");
             }
             else {
@@ -219,6 +219,7 @@ class UserController extends WebController
 
         // Récupération des emprunts de l'utilisateur
         $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
+
 
         return Template::render("views/user/me.php", array("user" => $user, "emprunts" => $emprunts));
     }

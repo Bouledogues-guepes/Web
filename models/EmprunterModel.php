@@ -39,7 +39,7 @@ class EmprunterModel extends SQL
     public function getEmprunts($idemprunteur): bool|array
     {
         try {
-            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? and EST_RENDU =0';
+            $sql = 'SELECT *,datediff(CURRENT_DATE,datedebutemprunt) as Retard FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? and EST_RENDU =0';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);

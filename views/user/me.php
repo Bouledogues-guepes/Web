@@ -46,7 +46,7 @@ $tel=$user->telportable;
                     $valeurDuCookie = isset($_COOKIE['masquerNumero']) ? $_COOKIE['masquerNumero'] : "";
 
                     if ($valeurDuCookie === "non") {
-                        echo '<div><p class="text-gray-600 mb-2" id="telAmasquer"><span class="font-bold">Téléphone:</span> ** ** ** ** **</p></div>';
+                        echo '<div><p class="text-gray-600 mb-2" id="telAmasquer"><span class="font-bold">Téléphone:</span> **********</p></div>';
                     } else {
                         echo '<div><p class="text-gray-600 mb-2" id="telAmasquer"><span class="font-bold">Téléphone:</span> ' . $user->telportable . '</p></div>';
                     }
@@ -96,26 +96,37 @@ $tel=$user->telportable;
             <?php } else { ?>
                 <!-- Tableau des emprunts -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5">
-
-                    <!-- Liste des emprunts -->
                     <?php foreach ($emprunts as $emprunt) { ?>
-                    <a href="/catalogue/detail/<?=$emprunt->idressource?>">
-                        <div class="bg-white shadow-lg rounded-lg px-6 py-4">
+                        <a href="/catalogue/detail/<?=$emprunt->idressource?>">
+                            <div class="bg-white shadow-lg rounded-lg flex p-4">
 
-                                <h2 class="text-xl font-semibold text-gray-800 mb-2"><?= $emprunt->titre ?></h2>
+                                <img loading="lazy" src="/public/assets/<?= $emprunt->image ?>" alt="<?= htmlspecialchars($emprunt->titre) ?>" class="w-1/4 h-32 object-cover object-center">
 
-                            <p class="text-gray-600 mb-2">Type: <span
-                                        class="font-semibold"><?= $emprunt->libellecategorie ?></span></p>
-                            <p class="text-gray-600 mb-2">
-                                Date d'emprunt:
-                                <span class="font-semibold"><?= date_format(date_create($emprunt->datedebutemprunt), "d/m/Y") ?></span>
-                            </p>
-                            <p class="text-gray-600 mb-2">
-                                Date de retour prévue:
-                                <span class="font-semibold"><?= date_format(date_create($emprunt->dateretour), "d/m/Y") ?></span>
-                            </p>
-                        </div>
-                    </a>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-2"><?= $emprunt->titre ?></h2>
+
+                                    <p class="text-gray-600 mb-2 font-bold">Type: <span class="font-semibold"><?= $emprunt->libellecategorie ?></span></p>
+                                    <p class="text-gray-600 mb-2 font-bold">
+                                        Date d'emprunt:
+                                        <span class="font-semibold"><?= date_format(date_create($emprunt->datedebutemprunt), "d/m/Y") ?></span>
+                                    </p>
+                                    <p class="text-gray-600 mb-2 font-bold">
+                                        Date de retour prévue:
+                                        <?php
+                                        if($emprunt->Retard >= $emprunt->dureeemprunt)
+                                        {
+                                            ?><span class="font-semibold"><?= date_format(date_create($emprunt->dateretour), "d/m/Y") ?>⚠️</span><?php
+                                        }
+                                        else
+                                        {
+                                            ?><span class="font-semibold "><?= date_format(date_create($emprunt->dateretour), "d/m/Y") ?></span><?php
+                                        }
+                                        ?>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     <?php } ?>
                 </div>
             <?php } ?>
