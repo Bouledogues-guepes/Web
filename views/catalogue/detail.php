@@ -43,7 +43,7 @@ if($langue=="en")
 
             <div class="bg-white shadow-lg rounded-lg px-6 py-4">
                 <h1 class="text-3xl font-bold text-gray-900 mb-4"><?= $ressource->titre ?></h1>
-                <p class="text-gray-600 mb-2">Note moyenne ≈ <span class="font-semibold">
+                <p class="text-gray-600 mb-2">Note moyenne : <span class="font-semibold">
                         <?php
                         for ($i = 1; $i <= 5; $i++) {
                             if ($i <= round($moyenne,0)) {
