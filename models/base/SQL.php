@@ -54,7 +54,7 @@ class SQL implements IDatabase
      */
     public function getOne(string $id): \stdClass|null
     {
-        $stmt = SQL::getPdo()->prepare("SELECT * FROM {$this->tableName} WHERE {$this->primaryKey} = ? LIMIT 1");
+        $stmt = SQL::getPdo()->prepare("SELECT ressource.idressource,ressource.idcategorie,titre,description,image,anneesortie,isbn,libellecategorie,nomAuteur,auteur.idAuteur,langue FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie inner join ecrire on ressource.idressource=ecrire.idRessource inner join auteur on auteur.idAuteur=ecrire.idAuteur where estArchive != 1 and ressource.{$this->primaryKey}=? order by libellecategorie limit 1;");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_OBJ);
     }

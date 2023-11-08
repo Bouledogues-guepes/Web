@@ -13,7 +13,9 @@ class RessourceModel extends SQL
 
     public function getAll(): array
     {
-        $sql = 'SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie where estArchive != 1;';
+        $sql = 'SELECT ressource.idressource,ressource.idcategorie,titre,description,image,anneesortie,isbn,libellecategorie,nomAuteur,auteur.idAuteur 
+FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie 
+    inner join ecrire on ressource.idressource=ecrire.idRessource inner join auteur on auteur.idAuteur=ecrire.idAuteur where estArchive != 1 order by libellecategorie;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);

@@ -59,6 +59,9 @@ if($langue=="en")
                 <p class="text-gray-600 mb-2">Description: <span class="font-semibold">
                         <?= $ressource->description ?>
                 </p>
+                <p class="text-gray-600 mb-2"> Auteur(s): <span class="font-semibold">
+                        <?= $ressource->nomAuteur?>
+                </p>
 
                 <!-- Bouton pour emprunter un exemplaire -->
                 <?php if ($exemplaire) { ?>
