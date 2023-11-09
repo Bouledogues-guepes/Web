@@ -42,7 +42,7 @@ class SQL implements IDatabase
      */
     public function getAll(): array|null
     {
-        $stmt = SQL::getPdo()->prepare("SELECT * FROM {$this->tableName};");
+        $stmt = SQL::getPdo()->prepare("SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie where estArchive != 1;");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }

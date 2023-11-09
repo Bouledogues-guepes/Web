@@ -80,7 +80,7 @@ class CatalogueController extends WebController
         $exemplaires = $this->exemplaireModel->getByRessource($id);
         $exemplaire = null;
 
-
+        $auteur=$this->ressourceModel->getAuteurById($id);
 
 
         // Pour l'instant, on ne gère qu'un exemplaire par ressource.
@@ -98,13 +98,13 @@ class CatalogueController extends WebController
             {
                 if ( $idRessource->idressource == $id)
                 {
-                    return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"true"));
+                    return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"true","auteurs"=>$auteur));
                 }
             }
 
 
         }
-        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"false"));
+        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"false","auteurs"=>$auteur));
     }
 
     function apropos(): string

@@ -11,15 +11,15 @@ class RessourceModel extends SQL
         parent::__construct('ressource', 'idressource');
     }
 
-    public function getAll(): array
+    public function getAuteurById(int $id): array
     {
-        $sql = 'SELECT ressource.idressource,ressource.idcategorie,titre,description,image,anneesortie,isbn,libellecategorie,nomAuteur,auteur.idAuteur 
-FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie 
-    inner join ecrire on ressource.idressource=ecrire.idRessource inner join auteur on auteur.idAuteur=ecrire.idAuteur where estArchive != 1 order by libellecategorie;';
+        $sql = 'SELECT nomauteur,ressource.titre FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie 
+    inner join ecrire on ressource.idressource=ecrire.idRessource inner join auteur on auteur.idAuteur=ecrire.idAuteur where ressource.idressource = ?;';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([$id]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
 
     public function getRandomRessource($limit = 3)
     {

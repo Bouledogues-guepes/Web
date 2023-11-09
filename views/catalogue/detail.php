@@ -60,7 +60,18 @@ if($langue=="en")
                         <?= $ressource->description ?>
                 </p>
                 <p class="text-gray-600 mb-2"> Auteur(s): <span class="font-semibold">
-                        <?= $ressource->nomAuteur?>
+                        <?php
+
+                        if (count($auteurs)>1) {
+                            foreach ($auteurs as $value)
+                                echo $value->nomauteur . ", ";
+                        }
+                        else
+                        {
+                            foreach ($auteurs as $value)
+                                echo $value->nomauteur;
+                        }
+                            ?>
                 </p>
 
                 <!-- Bouton pour emprunter un exemplaire -->
