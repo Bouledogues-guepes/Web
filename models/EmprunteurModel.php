@@ -90,6 +90,9 @@ class EmprunteurModel extends SQL
             // 2 : Compte validé par un admin
             // 3 : Compte banni
             // 4 : Compte supprimé
+            // 6 : Compte développeur
+            // 7 : Compte inactif
+
 
             $UUID = TokenHelpers::guidv4(); // Génération d'un UUID v4, qui sera utilisé pour la validation du compte
             $sql = 'INSERT INTO emprunteur (telportable,emailemprunteur, motpasseemprunteur, nomemprunteur, prenomemprunteur, datenaissance, validationcompte, validationtoken) VALUES (?, ?, ?, ?, ?, NOW(), 0, ?)';
@@ -177,6 +180,12 @@ class EmprunteurModel extends SQL
         $sql = 'UPDATE emprunteur SET motpasseemprunteur= ? WHERE idemprunteur= ?';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$password,$idEmprunteur]);
+    }
+
+    public function setInactif($idEmprunteur){
+        $sql = 'UPDATE emprunteur SET validationcompte= 7 WHERE idemprunteur= ?';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$idEmprunteur]);
     }
 
 

@@ -22,7 +22,7 @@ class SessionHelpers
     {
         $_SESSION['LOGIN'] = $user;
 
-        if($user->validationcompte == 9)
+        if($user->validationcompte == 6)
         {
             $_SESSION['isAdmin']=True;
         }

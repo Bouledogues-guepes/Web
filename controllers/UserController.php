@@ -86,10 +86,16 @@ class UserController extends WebController
     {
         $data = array();
 
-        //validationcompte
-        // 1  = actif
-        // 2 = validé par admin
-        // 9 = développeur
+        // Création de l'utilisateur en base de données.
+
+        // La validation du compte est un int qui prend plusieurs valeurs :
+        // 0 : Compte non validé
+        // 1 : email validé
+        // 2 : Compte validé par un admin
+        // 3 : Compte banni
+        // 4 : Compte supprimé
+        // 6 : Compte développeur
+        // 7 : Compte inactif
 
         if (isset($_POST["email"]) && isset($_POST["password"]))
         {
@@ -99,7 +105,7 @@ class UserController extends WebController
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
 
-            if ($result && ($validationcompte==1 || $validationcompte==2 || $validationcompte==9)) {
+            if ($result && ($validationcompte==1 || $validationcompte==2 || $validationcompte==6)) {
                 $this->redirect("/me");
             }
             else {
@@ -123,6 +129,11 @@ class UserController extends WebController
 
                 } elseif ($validationcompte == 4) {
                     $data["error"] = "Compte supprimé";
+                    SessionHelpers::logout();
+                }
+                elseif ($validationcompte == 7)
+                {
+                    $data["error"] = "Compte inactif";
                     SessionHelpers::logout();
                 }
 
@@ -358,6 +369,17 @@ class UserController extends WebController
         }
         header("Location:/me");
 
+    }
+
+    function delCompte(): string
+    {
+        $id=SessionHelpers::getConnected()->idemprunteur;
+
+        $this->emprunteur->setInactif($id);
+
+        SessionHelpers::logout();
+
+        return $this->redirect("/");
     }
 
 }

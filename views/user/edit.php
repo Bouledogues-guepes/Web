@@ -56,15 +56,58 @@
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">Préférences</h2>
                     <div class="mt-2">
                         <form method="post" action="/me">
+
+
                             <div class="border p-4 rounded-lg">
                                 <label class="block text-gray-700">Affichez le téléphone</label>
-                                <input type="radio" name="acceptConditions" value="oui" class="mr-1" required> Oui
+                                <input type="radio" name="acceptConditions" value="oui" class="mr-1" required > Oui
                                 <input type="radio" name="acceptConditions" value="non" class="ml-4 mr-1" required> Non
                             </div>
+
+
+
+
+
                             <div class="p-5 text-center">
                                 <button type="submit" name="modification" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2">Modifier</button>
                             </div>
                         </form>
+
+                        <a href="/delete" id="deleteLink">
+                            <div class="border p-4 rounded-lg bg-red-500 text-white flex justify-center items-center">
+                                <label class="block">🗑Supprimer le compte 🗑️</label>
+                            </div>
+                        </a>
+
+                        <div id="confirmationBox" class="hidden">
+                            <div class="border p-4 rounded-lg">
+                                <p class="mb-4">Êtes-vous sûr de vouloir supprimer votre compte ?</p>
+                                <div class="flex justify-center">
+                                    <button id="confirmDelete" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2">Confirmer</button>
+                                    <button id="cancelDelete" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            document.getElementById('deleteLink').addEventListener('click', function(e) {
+                                e.preventDefault(); // Empêche le lien de naviguer immédiatement
+
+                                // Afficher la boîte de confirmation
+                                document.getElementById('confirmationBox').classList.remove('hidden');
+                            });
+
+                            document.getElementById('confirmDelete').addEventListener('click', function() {
+                                // Placez ici le code pour supprimer le compte
+                                // Vous pouvez ajouter la redirection vers /delete
+                                window.location.href = '/delete';
+                            });
+
+                            document.getElementById('cancelDelete').addEventListener('click', function() {
+                                // Si l'utilisateur annule la suppression, masquez la boîte de confirmation
+                                document.getElementById('confirmationBox').classList.add('hidden');
+                            });
+                        </script>
                     </div>
                 </div>
             </div>

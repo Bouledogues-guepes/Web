@@ -49,6 +49,8 @@ class Web
             // Action de déconnexion.
             Route::Add('/logout', [$user, 'logout']);
 
+            Route::Add('/delete', [$user, 'delCompte']);
+
             // Action d'emprunt d'une ressource.
             Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
 
