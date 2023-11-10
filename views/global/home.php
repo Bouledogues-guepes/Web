@@ -2,14 +2,18 @@
 
     <!-- Bannière principale -->
     <section class="bg-gradient-to-r from-blue-500 to-indigo-600">
-        <div class="container mx-auto px-4 py-16">
+        <div class="container mx-auto px-4 py-16 flex flex-col items-center">
             <div class="max-w-xl mx-auto text-center">
                 <h1 class="text-5xl font-bold text-white mb-6">Bienvenue à la médiathèque</h1>
                 <p class="text-xl text-white">Découvrez notre vaste collection de livres, films et musique.</p>
-                <div class="mt-8">
+                <div class="mt-8 flex flex-col items-center">
                     <a href="/catalogue/all"
-                       class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full">
+                       class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full mb-4">
                         Parcourir les ressources
+                    </a>
+                    <a href="/statistique"
+                       class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full">
+                        Voir les statistiques
                     </a>
                 </div>
             </div>

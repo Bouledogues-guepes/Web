@@ -153,5 +153,12 @@ class CatalogueController extends WebController
     }
 
 
+    function statistique():string
+    {
+        $stat=$this->ressourceModel->getStatistique();
+
+        return Template::render("views/catalogue/statistique.php",["stat"=>$stat]);
+    }
+
 
 }

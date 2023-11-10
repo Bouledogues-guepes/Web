@@ -67,6 +67,7 @@ class Web
         if ( SessionHelpers::isAdmin())
         {
             Route::Add('/api', [$apidoc, 'liste']);
+            Route::Add("/statistique",[$catalogue,'statistique']);
         }
         // Route permettant l'accès au catalogue.
 
@@ -75,6 +76,7 @@ class Web
         Route::Add('/catalogue/{type}', [$catalogue, 'liste']);
 
         Route::Add('/apropos',[$catalogue,'apropos']);
+
 
 
     }
