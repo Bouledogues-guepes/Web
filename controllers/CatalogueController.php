@@ -72,6 +72,8 @@ class CatalogueController extends WebController
 
         $commentaires=$this->ressourceModel->getCommentairesByid($id);
 
+
+
         if ($ressource == null) {
             $this->redirect("/");
         }
@@ -92,19 +94,19 @@ class CatalogueController extends WebController
         if (SessionHelpers::isConnected())
         {
             $user = SessionHelpers::getConnected();
-            $idRessourceLu=$this->emprunterModel->ressourceDejaLu($user->idemprunteur);
 
-            foreach ($idRessourceLu as $idRessource)
-            {
-                if ( $idRessource->idressource == $id)
-                {
-                    return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"true","auteurs"=>$auteur));
-                }
-            }
+            $dejaLu=$this->emprunterModel->ressourceDejaLu($user->idemprunteur,$id);
+
+            $nbEmprunt=$this->emprunterModel->nombreEmprunt($user->idemprunteur);
+
+            return Template::render("views/catalogue/detail.php", array("ressource" => $ressource,
+                "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>$dejaLu,
+                "auteurs"=>$auteur,"nbEmprunt"=>$nbEmprunt));
 
 
         }
-        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>"false","auteurs"=>$auteur));
+        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire,
+            "commentaires"=> $commentaires,"dejaLu"=>"false","auteurs"=>$auteur));
     }
 
     function apropos(): string

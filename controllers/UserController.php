@@ -230,9 +230,9 @@ class UserController extends WebController
 
         // Récupération des emprunts de l'utilisateur
         $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
+        $nombreEmprunt= $this->emprunter->nombreEmprunt($user->idemprunteur);
 
-
-        return Template::render("views/user/me.php", array("user" => $user, "emprunts" => $emprunts));
+        return Template::render("views/user/me.php", array("user" => $user, "emprunts" => $emprunts,"nombreEmprunt"=>$nombreEmprunt));
     }
 
     /**

@@ -3,6 +3,7 @@ $email=$user->emailemprunteur;
 $prenom=$user->prenomemprunteur;
 $nom=$user->nomemprunteur;
 $tel=$user->telportable;
+//echo $nombreEmprunt->nb;
 ?>
 
 

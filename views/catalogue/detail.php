@@ -80,13 +80,25 @@ if($langue=="en")
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">
                         <?php
-                        if (SessionHelpers::isConnected()) {
+                        if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3)) {
                             ?>
                             <button type="submit"
                                     class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full">
                                 Emprunter
                             </button><br><br>
-                        <?php } ?>
+                        <?php }
+                        elseif (SessionHelpers::isConnected() && $nbEmprunt->nb >=3)
+                        {?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Vous avez atteint le maximum de livre emprunter !" disabled>
+                        Emprunter
+
+                            </button>
+
+                            <br><br><?php
+                        }
+
+                            ?>
                     </form>
                 <?php } ?>
                 <div class="bg-gray-200 p-4 mb-2 rounded-lg">
@@ -96,14 +108,21 @@ if($langue=="en")
 
                                 <form id="addCom" method="post" action ="/catalogue/detail/commentaire/<?=$ressource->idressource?>">
                                     <?php
-                                    if ($dejaLu=="false")
-                                    {?>
-                                    <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded opacity-50" title="Vous devez avoir lu le livre pour ajouter un commentaire" disabled >💬</button>
-                                    <?php }
+                                    if (!$dejaLu)
+                                    {
+                                        ?>
+
+
+                                        <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded opacity-50" title="Vous devez avoir lu le livre pour ajouter un commentaire" disabled >💬</button>
+                                    <?php
+                                    }
                                     else
-                                    {?>
+                                    {
+                                        ?>
                                         <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 px-4 py-2 rounded" title="Ajouter un commentaire" >💬</button>
-                                    <?php } ?>
+                                    <?php
+                                    }
+                                    ?>
                                     <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
 
                                 </form>

@@ -17,16 +17,15 @@ class EmprunteurModel extends SQL
 
     public function connexion(mixed $email, mixed $password)
     {
-        /**
-         * Rappel
-         *
-         * La validation du compte est un int qui prend plusieurs valeurs :
-         * 0 : Compte non validé
-         * 1 : email validé
-         * 2 : Compte validé par un admin
-         * 3 : Compte banni
-         * 4 : Compte supprimé
-         */
+        // La validation du compte est un int qui prend plusieurs valeurs :
+
+        // 0 : Compte non validé
+        // 1 : email validé
+        // 2 : Compte validé par un admin
+        // 3 : Compte banni
+        // 4 : Compte supprimé
+        // 6 : Compte développeur
+        // 7 : Compte inactif
 
         // TODO Il ne faut pas autoriser la connexion si le compte n'est pas validé
 

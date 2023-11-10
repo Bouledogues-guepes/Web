@@ -131,15 +131,15 @@ class EmprunterModel extends SQL
         }
     }
 
-    public function ressourceDejaLu($idemprunteur): int|array
+    public function ressourceDejaLu($idemprunteur,$idRessource): bool
     {
         try {
-            $sql = 'SELECT DISTINCT emprunter.idressource,titre from emprunter inner join ressource on emprunter.idressource=ressource.idressource where idemprunteur = ?';
+            $sql = 'SELECT count(*) as dejaLu from emprunter where idemprunteur = ? and idressource= ?';
             $stmt = parent::getPdo()->prepare($sql);
-            $stmt->execute([$idemprunteur]);
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+            $stmt->execute([$idemprunteur,$idRessource]);
+            return $stmt->fetch(\PDO::FETCH_OBJ)->dejaLu>0;
         } catch (\PDOException $e) {
-            return -1;
+            return false;
         }
     }
 
