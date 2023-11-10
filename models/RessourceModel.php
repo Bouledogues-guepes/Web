@@ -95,11 +95,11 @@ class RessourceModel extends SQL
     }
 
 
-    public function getStatistique():array
+    public function getStatistiqueParLivre():array
     {
-        $sql = 'SELECT titre,count(*)as NbEmprunt,year(datedebutemprunt) as Annee   
+        $sql = 'SELECT titre,count(*)as NbEmprunt   
 FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
-group by emprunter.idressource,year(datedebutemprunt) ;';
+group by emprunter.idressource ;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);

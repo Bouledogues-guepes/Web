@@ -1,9 +1,32 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <br>
-<div style="width: 80%; margin: auto; position: relative;">
-    <div style="background-color: white; border: 2px solid black; border-radius: 8px; padding: 16px;">
-        <canvas id="myChart"></canvas>
+
+<div class="flex flex-wrap w-full gap-4">
+
+    <!-- Graphique principal -->
+    <div class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 relative">
+        <div class="bg-white border-2 border-black rounded-lg p-4">
+            <p class="text-center font-bold text-2xl">Nombre d'emprunt par ressource</p>
+            <br>
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
+
+    <!-- Div contenant les deux nouvelles divs -->
+    <div class="w-full md:w-1/5 lg:w-1/4 xl:w-1/5 flex flex-col gap-4">
+
+        <!-- Première nouvelle div -->
+        <div class="bg-white border-2 border-black rounded-lg p-4">
+            <p class="text-center font-bold text-2xl">eachanzceaz</p>
+        </div>
+
+        <!-- Deuxième nouvelle div -->
+        <div class="bg-white border-2 border-black rounded-lg p-4">
+            <p class="text-center font-bold text-2xl">varzr"krvl"ara"v</p>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
