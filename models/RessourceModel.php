@@ -105,6 +105,28 @@ group by emprunter.idressource ;';
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function getStatistiqueParAnnee():array
+    {
+        $sql = 'SELECT year(datedebutemprunt) AS ANNEE,count(*) as NbEmprunt   
+FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
+group by year(datedebutemprunt) ;';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getStatistiqueParCom():array
+    {
+        $sql = 'SELECT titre ,count(com) as NbCom   
+FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource INNER join commentaire on ressource.idressource=commentaire.idressource
+group by titre ;';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+
+
 
 
 }

@@ -90,7 +90,7 @@ if($langue=="en")
                         elseif (SessionHelpers::isConnected() && $nbEmprunt->nb >=3)
                         {?>
                             <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Vous avez atteint le maximum de livre emprunter !" disabled>
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Vous avez atteint le maximum de livre à emprunter !" disabled>
                         Emprunter
 
                             </button>

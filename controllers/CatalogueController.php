@@ -155,9 +155,11 @@ class CatalogueController extends WebController
 
     function statistique():string
     {
-        $stat=$this->ressourceModel->getStatistiqueParLivre();
+        $StatistiqueParLivre=$this->ressourceModel->getStatistiqueParLivre();
+        $StatistiqueParAnnee=$this->ressourceModel->getStatistiqueParAnnee();
+        $getStatistiqueParCom=$this->ressourceModel->getStatistiqueParCom();
 
-        return Template::render("views/catalogue/statistique.php",["stat"=>$stat]);
+        return Template::render("views/catalogue/statistique.php",["StatistiqueParLivre"=>$StatistiqueParLivre,"StatistiqueParAnnee"=>$StatistiqueParAnnee,"StatistiqueParCom"=>$getStatistiqueParCom]);
     }
 
 
