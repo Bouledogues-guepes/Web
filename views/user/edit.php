@@ -6,8 +6,16 @@
                 <form method="post" action="/me/edit/info">
                 <div class="mb-4">
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">Modifier les informations personnelles</h2>
-                    <!-- Ajoutez ici les champs d'édition pour les informations personnelles -->
-                    <!-- Par exemple : -->
+
+                    <?php
+                    if (isset($_SESSION['errorInfo'])): ?>
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <span class="block sm:inline"><?= htmlspecialchars($_SESSION['errorInfo']) ?></span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        </span>
+                        </div>
+                        <?php unset($_SESSION['errorInfo']); ?>
+                    <?php endif; ?>
                     <input type="text" placeholder="Nouveau nom" class="w-full mt-2 border p-2 rounded-lg" name="newName">
                     <input type="text" placeholder="Nouveau prénom" class="w-full mt-2 border p-2 rounded-lg" name="newPname">
                     <input type="date" placeholder="Nouvelle date de naissance" class="w-full mt-2 border p-2 rounded-lg" name="newDateN">
@@ -32,8 +40,14 @@
                 <div class="mb-4">
 
                     <h2 class="text-xl font-semibold text-gray-800 mb-2 ">Modifier le mots de passe</h2>
-                    <!-- Ajoutez ici les champs d'édition pour les informations personnelles -->
-                    <!-- Par exemple : -->
+                    <?php if (isset($_SESSION['errorPassword'])): ?>
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <span class="block sm:inline"><?= htmlspecialchars($_SESSION['errorPassword']) ?></span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        </span>
+                        </div>
+                        <?php unset($_SESSION['errorPassword']); ?>
+                    <?php endif; ?>
                     <input type="password" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
                     <br>
                     <input type="password" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">

@@ -13,6 +13,27 @@ $tel=$user->telportable;
         <!-- Colonne de gauche -->
         <div class="w-full md:w-1/3 px-4">
             <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg px-6 py-4">
+
+                <?php
+                if (isset($_SESSION['chgmPassword'])): ?>
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span class="block sm:inline"><?= htmlspecialchars($_SESSION['chgmPassword']) ?></span>
+                        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        </span>
+                    </div>
+                    <?php unset($_SESSION['chgmPassword']); ?>
+                <?php endif;
+
+
+                if (isset($_SESSION['modifInfo'])): ?>
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline"><?= htmlspecialchars($_SESSION['modifInfo']) ?></span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        </span>
+                </div>
+                <?php unset($_SESSION['modifInfo']); ?>
+                <?php endif; ?>
+
                 <div class="flex items-center justify-center mb-4">
                     <img src="<?= \utils\Gravatar::get_gravatar($user->emailemprunteur) ?>" alt="Photo de profil"
                          class="rounded-full h-32 w-32">

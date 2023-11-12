@@ -352,6 +352,12 @@ class UserController extends WebController
 
         if ($this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel)){
             SessionHelpers::setLogin($newName,$newPname,$newDateN,$newEmail,$newTel);
+            $_SESSION['modifInfo'] = 'Vos informations personnelles ont bien été modifiés';
+        }
+        else
+        {
+            $_SESSION['errorInfo'] = 'Une erreur est survenu lors de la modfication des informations';
+            header("Location:/me/edit");
         }
 
         //SessionHelpers::login();
@@ -363,17 +369,33 @@ class UserController extends WebController
         $user = SessionHelpers::getConnected();
         $emprunteur = $this->emprunteur->getOne($user->idemprunteur);
         $mdp = $emprunteur->motpasseemprunteur;
+
         if(password_verify($currentPassword, $mdp)){
             if ($newPassword === $confirmNewPassword){
                 if($this->verifierMotDePasse($newPassword)){
                     $this->emprunteur->modifyPassword(password_hash($newPassword,PASSWORD_DEFAULT), $user->idemprunteur);
+                    $_SESSION['chgmPassword']="Le mots de passe a bien été modifié";
+                    header("Location:/me");
                 }
-
-
+                else
+                {
+                    $_SESSION['errorPassword'] = 'Le mot de passe doit contenir 8 caractéres, une majuscule et au moins un caractère spécial';
+                    header("Location:/me/edit");
+                }
             }
+            else
+            {
+                $_SESSION['errorPassword'] = 'Le mot de passe de confirmation ne correspond pas';
+                header("Location:/me/edit");
+            }
+        }
+        else
+        {
+
+            $_SESSION['errorPassword'] = 'Veuillez entrer le mot de passe de votre compte';
+            header("Location:/me/edit");
 
         }
-        header("Location:/me");
 
     }
 
