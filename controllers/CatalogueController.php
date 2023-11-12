@@ -157,9 +157,10 @@ class CatalogueController extends WebController
     {
         $StatistiqueParLivre=$this->ressourceModel->getStatistiqueParLivre();
         $StatistiqueParAnnee=$this->ressourceModel->getStatistiqueParAnnee();
-        $getStatistiqueParCom=$this->ressourceModel->getStatistiqueParCom();
+        $StatistiqueParCom=$this->ressourceModel->getStatistiqueParCom();
+        $StatistiqueParMoyenne=$this->ressourceModel->getStatistiqueParMoyenne();
 
-        return Template::render("views/catalogue/statistique.php",["StatistiqueParLivre"=>$StatistiqueParLivre,"StatistiqueParAnnee"=>$StatistiqueParAnnee,"StatistiqueParCom"=>$getStatistiqueParCom]);
+        return Template::render("views/catalogue/statistique.php",["StatistiqueParLivre"=>$StatistiqueParLivre,"StatistiqueParAnnee"=>$StatistiqueParAnnee,"StatistiqueParCom"=>$StatistiqueParCom,"StatistiqueParMoyenne"=>$StatistiqueParMoyenne]);
     }
 
 

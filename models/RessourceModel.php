@@ -99,7 +99,7 @@ class RessourceModel extends SQL
     {
         $sql = 'SELECT titre,count(*)as NbEmprunt   
 FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
-group by emprunter.idressource ;';
+group by emprunter.idressource order by NbEmprunt desc limit 10;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -109,7 +109,7 @@ group by emprunter.idressource ;';
     {
         $sql = 'SELECT year(datedebutemprunt) AS ANNEE,count(*) as NbEmprunt   
 FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource 
-group by year(datedebutemprunt) ;';
+group by year(datedebutemprunt) order by ANNEE asc;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -119,11 +119,22 @@ group by year(datedebutemprunt) ;';
     {
         $sql = 'SELECT titre ,count(com) as NbCom   
 FROM emprunter inner join ressource on ressource.idressource=emprunter.idressource INNER join commentaire on ressource.idressource=commentaire.idressource
-group by titre ;';
+group by titre order by NbCom desc limit 6;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function getStatistiqueParMoyenne():array
+    {
+        $sql = 'SELECT round(sum(noteCom)/ count(noteCom),1) as moyenne,titre 
+from commentaire inner join ressource on ressource.idressource=commentaire.idressource 
+group by commentaire.idressource order by moyenne desc ';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
 
 
 
