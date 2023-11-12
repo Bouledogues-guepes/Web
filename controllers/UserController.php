@@ -344,6 +344,12 @@ class UserController extends WebController
     {
         $user = SessionHelpers::getConnected();
         $idUser=$user->idemprunteur;
+
+        $newName=strip_tags(htmlspecialchars($newName));
+        $newPname=strip_tags(htmlspecialchars($newPname));
+
+
+
         if ($this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel)){
             SessionHelpers::setLogin($newName,$newPname,$newDateN,$newEmail,$newTel);
         }

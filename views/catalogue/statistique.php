@@ -339,3 +339,24 @@ if($numero==4) {
         scrollToBottom();
     };
 </script>
+
+<?php
+
+
+
+//$dataStatistiqueParLivre = json_decode(json_encode($StatistiqueParLivre), true);
+//print_r($dataStatistiqueParLivre);
+//
+//
+//$dataStatistiqueParAnnee = json_decode(json_encode($StatistiqueParAnnee), true);
+//print_r($dataStatistiqueParAnnee);
+//
+//
+//$dataStatistiqueParCom = json_decode(json_encode($StatistiqueParCom), true);
+//print_r($dataStatistiqueParCom);
+//
+//
+//$dataStatistiqueParMoyenne = json_decode(json_encode($StatistiqueParMoyenne), true);
+//print_r($dataStatistiqueParMoyenne);
+
+?>

@@ -138,6 +138,7 @@ class EmprunteurModel extends SQL
         }, $all);
     }
 
+
     public function validateAccount($uuid)
     {
 
@@ -169,17 +170,20 @@ class EmprunteurModel extends SQL
     }
 
     public function modifyInfo(mixed $idUser,mixed $newName,mixed $newPname,mixed $newDateN,mixed $newEmail,mixed $newTel){
-
         $sql = 'UPDATE emprunteur SET nomemprunteur = ?, prenomemprunteur = ?, datenaissance = ?, emailemprunteur = ?, telportable = ? WHERE idemprunteur= ?';
         $stmt = parent::getPdo()->prepare($sql);
         return $stmt->execute([$newName, $newPname, $newDateN, $newEmail, $newTel, $idUser]);
     }
+
+
 
     public function modifyPassword($password,$idEmprunteur){
         $sql = 'UPDATE emprunteur SET motpasseemprunteur= ? WHERE idemprunteur= ?';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$password,$idEmprunteur]);
     }
+
+
 
     public function setInactif($idEmprunteur){
         $sql = 'UPDATE emprunteur SET validationcompte= 7 WHERE idemprunteur= ?';

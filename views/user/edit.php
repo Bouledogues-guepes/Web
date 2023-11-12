@@ -12,7 +12,7 @@
                     <input type="text" placeholder="Nouveau prénom" class="w-full mt-2 border p-2 rounded-lg" name="newPname">
                     <input type="date" placeholder="Nouvelle date de naissance" class="w-full mt-2 border p-2 rounded-lg" name="newDateN">
                     <input type="email" placeholder="Nouvel email" class="w-full mt-2 border p-2 rounded-lg" name="newEmail">
-                    <input type="text" placeholder="Nouveau téléphone" class="w-full mt-2 border p-2 rounded-lg" name="newTel">
+                    <input type="number" placeholder="Nouveau téléphone" class="w-full mt-2 border p-2 rounded-lg" name="newTel">
                 </div>
 
 
