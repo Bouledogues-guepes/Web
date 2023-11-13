@@ -28,16 +28,16 @@ if($langue=="en")
 $tabIdEmpunts=[];
 $inTab=false;
 
-foreach ($listeIdDejaLu as $value)
+if (SessionHelpers::isConnected())
 {
-    $tabIdEmpunts[] = $value->idressource;
-}
+    foreach ($listeIdDejaLu as $value) {
+        $tabIdEmpunts[] = $value->idressource;
+    }
 
-if (in_array($ressource->idressource,$tabIdEmpunts))
-{
-    $inTab=true;
+    if (in_array($ressource->idressource, $tabIdEmpunts)) {
+        $inTab = true;
+    }
 }
-
 
 
 

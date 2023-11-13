@@ -11,11 +11,18 @@
                        class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full mb-4">
                         Parcourir les ressources
                     </a>
-                    <a href="/statistique"
-                       class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full">
+
+                    <?php
+                    if (isset($_SESSION['isAdmin'])) {
+?>
+
+                        <a href = "/statistique"
+                           class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full" >
                         Voir les statistiques
-                    </a>
-                </div>
+                        </a ><?php
+                        }
+                        ?>
+                    </div>
             </div>
         </div>
     </section>

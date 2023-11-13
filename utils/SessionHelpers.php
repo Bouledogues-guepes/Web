@@ -24,15 +24,16 @@ class SessionHelpers
 
         if($user->validationcompte == 6)
         {
-            $_SESSION['isAdmin']=True;
+            $_SESSION['isAdmin']=true;
         }
 
     }
 
     static function logout(): void
     {
-        unset($_SESSION['LOGIN']);
         unset($_SESSION['isAdmin']);
+        unset($_SESSION['LOGIN']);
+
     }
 
     static function getConnected(): mixed
