@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/public/style/main.css">
     <script src="/public/js/sweetalert2.all.min.js"></script>
     <script src="/public/js/vue.global.prod.js"></script>
+    <link rel="icon" type=image/png" sizes="32x32" href="../../public/images/icon.png">
 </head>
 
 <body class="bg-[#F2F4F7]">
