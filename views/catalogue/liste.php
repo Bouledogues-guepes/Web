@@ -41,11 +41,14 @@
 
     </form>
 
-    <form action="/catalogue/recherche" method="POST" class="ml-auto mt-2">
+    <form action="/catalogue/recherche" method="POST" class="flex items-center mt-2">
+
         <input type="text" name="mot" placeholder="Recherche..." class="border p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300">
+
         <button type="submit" class="ml-2" aria-label="Rechercher">
             🔍
         </button>
+
     </form>
 
 

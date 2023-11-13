@@ -58,21 +58,27 @@ function div($nb)
             </div>';
 }
 
+function globaldiv($titre,$num)
+{
+    echo '        <div class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 relative">
+            <div class="bg-white border-2 border-black rounded-lg p-4">
+                <p class="text-center font-bold text-2xl">'.$titre.'</p>
+                <br>
+                <canvas id="myChart'.$num.'"></canvas>
+            </div>
+        </div>';
+}
+
+
+
     if($numero==1)
 
     {
         ?>
         <div class="flex flex-wrap w-full gap-4 mt-5">
 
-            <!-- Graphique principal -->
-            <div class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 relative">
-                <div class="bg-white border-2 border-black rounded-lg p-4">
-                    <p class="text-center font-bold text-2xl">Les 10 Ressources les plus empruntés</p>
-                    <br>
-                    <canvas id="myChart1"></canvas>
-                </div>
-            </div>
 
+            <?php globaldiv("Les 10 Ressources les plus empruntés",1)?>
             <!-- Div contenant les deux nouvelles divs -->
             <div class="w-full md:w-1/5 lg:w-1/4 xl:w-1/5 flex flex-col gap-4">
 
@@ -94,18 +100,7 @@ function div($nb)
 
         <div class="flex flex-wrap w-full gap-4 mt-5">
 
-        <!-- Graphique principal -->
-        <div class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 relative">
-
-            <div class="bg-white border-2 border-black rounded-lg p-4">
-                <p class="text-center font-bold text-2xl">Nombre d'emprunt par annee</p>
-                <br>
-                <!-- Utiliser un autre identifiant pour le deuxième graphique -->
-                <canvas id="myChart2"></canvas>
-            </div>
-
-
-        </div>
+            <?php globaldiv("Nombre d'emprunt par annee",2)?>
 
         <!-- Div contenant les deux nouvelles divs -->
         <div class="w-full md:w-1/5 lg:w-1/4 xl:w-1/5 flex flex-col gap-4">
@@ -127,14 +122,7 @@ function div($nb)
 
         <div class="flex flex-wrap w-full gap-4 mt-5">
 
-            <!-- Graphique principal -->
-            <div class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 relative">
-                <div class="bg-white border-2 border-black rounded-lg p-4">
-                    <p class="text-center font-bold text-2xl">Les 6 Ressources avec le plus de commentaires</p>
-                    <br>
-                    <canvas id="myChart3"></canvas>
-                </div>
-            </div>
+            <?php globaldiv("Les 6 Ressources avec le plus de commentaires",3)?>
 
             <!-- Div contenant les deux nouvelles divs -->
             <div class="w-full md:w-1/5 lg:w-1/4 xl:w-1/5 flex flex-col gap-4">
@@ -155,14 +143,8 @@ if($numero==4) {
 
     <div class="flex flex-wrap w-full gap-4 mt-5">
 
-        <!-- Graphique principal -->
-        <div class="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 relative">
-            <div class="bg-white border-2 border-black rounded-lg p-4">
-                <p class="text-center font-bold text-2xl">Les ressources les mieux notés</p>
-                <br>
-                <canvas id="myChart4"></canvas>
-            </div>
-        </div>
+
+        <?php globaldiv("Les ressources les mieux notés",4)?>
 
         <!-- Div contenant les deux nouvelles divs -->
         <div class="w-full md:w-1/5 lg:w-1/4 xl:w-1/5 flex flex-col gap-4">

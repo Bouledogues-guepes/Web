@@ -74,6 +74,9 @@ class CatalogueController extends WebController
                 }
                 else
                 {
+                    $mot=strip_tags($mot);
+
+
                     $listtype= $this->categorieModel->getAllType();
 
                     $catalogue = $this->ressourceModel->recherche($mot);
