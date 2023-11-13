@@ -25,6 +25,20 @@ if($langue=="en")
     $langue="🅴🅽";
 }
 
+$tabIdEmpunts=[];
+$inTab=false;
+
+foreach ($listeIdDejaLu as $value)
+{
+    $tabIdEmpunts[] = $value->idressource;
+}
+
+if (in_array($ressource->idressource,$tabIdEmpunts))
+{
+    $inTab=true;
+}
+
+
 ?>
 
 
@@ -80,10 +94,10 @@ if($langue=="en")
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">
                         <?php
-                        if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3)) {
+                        if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3) && !$inTab) {
                             ?>
                             <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full">
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full" title="Emprunter cette ressource">
                                 Emprunter
                             </button><br><br>
                         <?php }
@@ -94,11 +108,23 @@ if($langue=="en")
                         Emprunter
 
                             </button>
+                            <br><br>
+                            <?php
+                        }
+                        elseif (SessionHelpers::isConnected() && $inTab)
+                        {?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>
+                                Emprunter
 
-                            <br><br><?php
+                            </button>
+                            <br><br>
+                            <?php
                         }
 
-                            ?>
+
+
+                        ?>
                     </form>
                 <?php } ?>
                 <div class="bg-gray-200 p-4 mb-2 rounded-lg">

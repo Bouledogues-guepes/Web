@@ -36,7 +36,6 @@ class CatalogueController extends WebController
     {
 
         $listtype= $this->categorieModel->getAllType();
-
         if ($type == "all") {
             // Récupération de l'ensemble du catalogue
             $catalogue = $this->ressourceModel->getAllRessource();
@@ -84,7 +83,6 @@ class CatalogueController extends WebController
 
         $auteur=$this->ressourceModel->getAuteurById($id);
 
-
         // Pour l'instant, on ne gère qu'un exemplaire par ressource.
         // Si on en trouve plusieurs, on prend le premier.
         if ($exemplaires && sizeof($exemplaires) > 0) {
@@ -99,9 +97,12 @@ class CatalogueController extends WebController
 
             $nbEmprunt=$this->emprunterModel->nombreEmprunt($user->idemprunteur);
 
+            $listeIdDejaLu=$this->emprunterModel->IdRessourceDejaLu($user->idemprunteur);
+
+
             return Template::render("views/catalogue/detail.php", array("ressource" => $ressource,
                 "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>$dejaLu,
-                "auteurs"=>$auteur,"nbEmprunt"=>$nbEmprunt));
+                "auteurs"=>$auteur,"nbEmprunt"=>$nbEmprunt,"listeIdDejaLu"=>$listeIdDejaLu));
 
 
         }

@@ -143,6 +143,18 @@ class EmprunterModel extends SQL
         }
     }
 
+    public function IdRessourceDejaLu($idemprunteur): array
+    {
+
+        $sql = 'SELECT idressource from emprunter where idemprunteur=? and EST_RENDU=0;';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$idemprunteur]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+    }
+
+
+
 
 
 }
