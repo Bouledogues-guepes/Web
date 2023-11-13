@@ -1,4 +1,5 @@
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
+
     <h2 class="text-3xl font-bold text-gray-800 mb-4"><?= $titre ?></h2>
 
 
@@ -15,7 +16,7 @@
         </button>
         <a href="/catalogue/all" class="text-indigo-600 hover:text-red-600 ml-2" title="Réinitialiser la recherche"> ❌️</a>
 
-            <!-- Dropdown menu -->
+        <!-- Dropdown menu -->
         <div id="dropdownSearch" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700 absolute">
             <br>
             <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownSearchButton">
@@ -25,10 +26,10 @@
 
                     ?>
                     <li>
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="<?= $row->idcategorie?>" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                            <label for="<?= $row -> idcategorie?>" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"><?php echo $row -> libellecategorie;?></label>
-                        </div>
+                    <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                        <input id="<?= $row->idcategorie?>" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="<?= $row -> idcategorie?>" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"><?php echo $row -> libellecategorie;?></label>
+                    </div>
                     </li><?php
                 }
                 ?>
@@ -40,6 +41,13 @@
 
     </form>
 
+    <form action="/catalogue/recherche" method="POST" class="ml-auto mt-2">
+        <input type="text" name="mot" placeholder="Recherche..." class="border p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300">
+        <button type="submit" class="ml-2" aria-label="Rechercher">
+            🔍
+        </button>
+    </form>
+
 
     <br>
     <br>
@@ -49,7 +57,7 @@
     if ($catalogue == null)
     {
     ?>
-    <h3 class="text-xl font-semibold text-gray-800 mb-2 truncate">Aucun ressource n'est associé a cette catégorie</h3>
+    <h3 class="text-xl font-semibold text-gray-800 mb-2 truncate">Aucun ressource n'est associé votre recherche</h3>
     <?php
         }
     ?>

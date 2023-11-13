@@ -145,6 +145,17 @@ group by commentaire.idressource order by moyenne desc ';
     }
 
 
+    public function recherche($mot):array
+    {
+        $sql = 'SELECT * FROM ressource 
+                INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie 
+                WHERE titre LIKE ? AND estArchive = 0';
+
+        $motRecherche = '%' . $mot . '%';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$motRecherche]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
 
 
 

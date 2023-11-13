@@ -27,31 +27,62 @@ class CatalogueController extends WebController
         $this->emprunterModel = new EmprunterModel();
     }
 
+
+
+
+    function verifierFormat($url)
+    {
+
+        $path = parse_url($url, PHP_URL_PATH);
+
+
+        $pattern = '~\d+(&\d+)*$~';
+
+        return preg_match($pattern, $path) === 1;
+    }
+
+
+
     /**
      * Affiche la liste des ressources.
      * @param string $type
      * @return string
      */
-    function liste(string $type): string
+    function liste(string $type,$mot=""): string
     {
 
         $listtype= $this->categorieModel->getAllType();
+
+
+
         if ($type == "all") {
-            // Récupération de l'ensemble du catalogue
+
             $catalogue = $this->ressourceModel->getAllRessource();
 
-            // Affichage de la page à l'utilisateur
+
             return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue ));
         }
 
         else
         {
+                if($this->verifierFormat($type))
+                {
+                    $casser = explode('&amp;', $type);
+                    $casser = implode(',', $casser);
+                    $catalogue = $this->ressourceModel->getRessourceByType($casser);
+                    return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue", "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue]);
+                }
+                else
+                {
+                    $listtype= $this->categorieModel->getAllType();
 
-            $casser=explode('&amp;',$type);
-            $casser=implode(',',$casser);
-            $catalogue = $this->ressourceModel->getRessourceByType($casser);
+                    $catalogue = $this->ressourceModel->recherche($mot);
 
-            return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue]);
+                    return Template::render("views/catalogue/liste.php", ["titre" => "Recherche à partir de : ".$mot, "listtype" => $listtype, "catalogue" => $catalogue]);
+                }
+
+
+
 
         }
     }
