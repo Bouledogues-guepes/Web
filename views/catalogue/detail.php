@@ -40,6 +40,9 @@ if (SessionHelpers::isConnected())
 }
 
 
+
+
+
 ?>
 
 
@@ -95,10 +98,10 @@ if (SessionHelpers::isConnected())
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">
                         <?php
-                        if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3) && !$inTab) {
+                        if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3) && !$inTab && $examplaireRestant>0) {
                             ?>
                             <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full" title="Vous souhaitez mprunter cette ressource ? Il reste <?=$examplaireRestant?> exemplaire(s)">
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full" title="Vous souhaitez emprunter cette ressource ? Il reste <?=$examplaireRestant?> exemplaire(s)">
                                 Emprunter
                             </button><br><br>
                         <?php }
@@ -107,17 +110,6 @@ if (SessionHelpers::isConnected())
                             <button type="submit"
                                     class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Vous avez atteint le maximum de livre à emprunter !" disabled>
                         Emprunter
-
-                            </button>
-                            <br><br>
-                            <?php
-                        }
-                        elseif (SessionHelpers::isConnected() && $inTab)
-                        {
-                            ?>
-                            <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>
-                                Emprunter
 
                             </button>
                             <br><br>
@@ -134,9 +126,18 @@ if (SessionHelpers::isConnected())
                             <br><br>
                             <?php
                         }
+                        elseif (SessionHelpers::isConnected() && $inTab )
+                        {
+                            var_dump($examplaireRestant);
+                            ?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>
+                                Emprunter
 
-
-
+                            </button>
+                            <br><br>
+                            <?php
+                        }
                         ?>
                     </form>
                 <?php } ?>
