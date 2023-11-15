@@ -39,7 +39,6 @@ if (SessionHelpers::isConnected())
     }
 }
 
-echo $examplaireRestant;
 
 ?>
 
@@ -99,7 +98,7 @@ echo $examplaireRestant;
                         if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3) && !$inTab) {
                             ?>
                             <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full" title="Emprunter cette ressource">
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full" title="Vous souhaitez mprunter cette ressource ? Il reste <?=$examplaireRestant?> exemplaire(s)">
                                 Emprunter
                             </button><br><br>
                         <?php }

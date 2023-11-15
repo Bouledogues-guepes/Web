@@ -128,7 +128,8 @@ class CatalogueController extends WebController
         }
 
         $restant=$this->exemplaireModel->getNbExemplaire($id)-$this->exemplaireModel->getNbEmprunt($id);
-        if ($restant>0){$restant=0;}
+
+        if ($restant<0){$restant=0;}
 
         if (SessionHelpers::isConnected())
         {
