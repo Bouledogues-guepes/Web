@@ -31,7 +31,10 @@ class RessourceModel extends SQL
 
     public function getRecentRessource($limit = 3)
     {
-        $sql = 'SELECT * FROM `ressource` inner join exemplaire on ressource.idressource=exemplaire.idressource inner join categorie on ressource.idcategorie=categorie.idcategorie where estArchive != 1 order by dateentree desc limit ?';
+        $sql = 'SELECT titre,MAX(ressource.idressource) AS idressource,MAX(ressource.idcategorie) AS idcategorie,MAX(description) AS description,MAX(image) AS image,
+                MAX(anneesortie) AS anneesortie,MAX(isbn) AS isbn,MAX(langue) AS langue,MAX(estArchive) AS estArchive,MAX(idexemplaire) AS idexemplaire,MAX(idetat) AS idetat,
+                MAX(dateentree) AS dateentree,MAX(libellecategorie) AS libellecategorie FROM `ressource` INNER JOIN exemplaire ON ressource.idressource = exemplaire.idressource
+                INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie WHERE estArchive != 1 GROUP BY titre ORDER BY MAX(dateentree) DESC LIMIT ?;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$limit]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);

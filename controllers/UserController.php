@@ -6,6 +6,7 @@ use controllers\base\WebController;
 use Exception;
 use models\EmprunterModel;
 use models\EmprunteurModel;
+use models\ExemplaireModel;
 use models\RessourceModel;
 use utils\EmailUtils;
 use utils\SessionHelpers;
@@ -20,11 +21,14 @@ class UserController extends WebController
 
     private RessourceModel $ressource;
 
+    private ExemplaireModel $exemplaire;
+
     function __construct()
     {
         $this->emprunteur = new EmprunteurModel();
         $this->emprunter = new EmprunterModel();
         $this->ressource = new RessourceModel();
+        $this->exemplaire = new ExemplaireModel();
     }
 
     /**
@@ -253,17 +257,19 @@ class UserController extends WebController
         $user = SessionHelpers::getConnected();
 
         if (!$user || !$idRessource || !$idExemplaire) {
-            // Gestion d'erreur à améliorer
-            die ("Erreur: utilisateur non connecté ou ids non renseignés");
+            $_SESSION["ErrorLogin"]="Une erreur est survenu, veuillez vous reconnecter !";
+            $this->redirect("/login");
         }
 
         // On déclare l'emprunt, et on redirige l'utilisateur vers sa page de profil
 
         $nbEmprunt= $this->emprunter->nombreEmprunt( $user->idemprunteur);
+        $nbExemplaire=$this->exemplaire->getNbExemplaire($idRessource);
+        $nbEmprunt=$this->exemplaire->getNbEmprunt($idRessource) ;
 
+        $restant=$nbExemplaire-$nbEmprunt;
 
-
-        if ($nbEmprunt->nb <3)
+        if ($nbEmprunt->nb <3 && $restant>0)
         {
             $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
             $titre = $this->ressource->getLivreById($idRessource);
@@ -283,13 +289,19 @@ class UserController extends WebController
             if ($result) {
                 $this->redirect("/me");
             } else {
-                // Gestion d'erreur à améliorer
-                die("Erreur lors de l'emprunt");
+                $_SESSION["ErrorRessource"]="Une erreur est survenu, veuillez réesayer plus tard !";
+
+                $this->redirect("/me");
             }
         }
         else
         {
+            $_SESSION["ErrorRessource"]="Nous n'avons plus d'exemplaire de cette ressource !";
+
             $this->redirect("/me");
+
+
+
         }
     }
 

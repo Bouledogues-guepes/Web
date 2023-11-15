@@ -32,7 +32,19 @@ $tel=$user->telportable;
                         </span>
                 </div>
                 <?php unset($_SESSION['modifInfo']); ?>
+                <?php endif;
+
+                if (isset($_SESSION['ErrorRessource'])): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline"><?= htmlspecialchars($_SESSION['ErrorRessource']) ?></span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        </span>
+                </div>
+                <?php unset($_SESSION['ErrorRessource']); ?>
                 <?php endif; ?>
+
+
+
 
                 <div class="flex items-center justify-center mb-4">
                     <img src="<?= \utils\Gravatar::get_gravatar($user->emailemprunteur) ?>" alt="Photo de profil"

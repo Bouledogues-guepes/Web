@@ -9,6 +9,18 @@
                 </div>
             <?php } ?>
 
+            <?php if (isset($_SESSION["ErrorLogin"])) { ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">Oups ! </strong>
+                    <span class="block sm:inline"><?= $_SESSION["ErrorLogin"] ?></span>
+                </div>
+            <?php }
+            unset($_SESSION["ErrorLogin"])?>
+
+
+
+
+
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Connexion à votre compte
             </h1>
