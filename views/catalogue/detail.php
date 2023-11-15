@@ -39,10 +39,7 @@ if (SessionHelpers::isConnected())
     }
 }
 
-
-
-
-
+echo $examplaireRestant;
 
 ?>
 
@@ -117,9 +114,21 @@ if (SessionHelpers::isConnected())
                             <?php
                         }
                         elseif (SessionHelpers::isConnected() && $inTab)
-                        {?>
+                        {
+                            ?>
                             <button type="submit"
                                     class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>
+                                Emprunter
+
+                            </button>
+                            <br><br>
+                            <?php
+                        }
+                        elseif (SessionHelpers::isConnected() && $examplaireRestant==0)
+                        {
+                            ?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Plus aucun exemplaire de la ressource n'est disponible. Pardon !" disabled>
                                 Emprunter
 
                             </button>

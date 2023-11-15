@@ -123,11 +123,12 @@ class CatalogueController extends WebController
 
         $auteur=$this->ressourceModel->getAuteurById($id);
 
-        // Pour l'instant, on ne gère qu'un exemplaire par ressource.
-        // Si on en trouve plusieurs, on prend le premier.
         if ($exemplaires && sizeof($exemplaires) > 0) {
             $exemplaire = $exemplaires[0];
         }
+
+        $restant=$this->exemplaireModel->getNbExemplaire($id)-$this->exemplaireModel->getNbEmprunt($id);
+        if ($restant>0){$restant=0;}
 
         if (SessionHelpers::isConnected())
         {
@@ -142,7 +143,7 @@ class CatalogueController extends WebController
 
             return Template::render("views/catalogue/detail.php", array("ressource" => $ressource,
                 "exemplaire" => $exemplaire,"commentaires"=> $commentaires,"dejaLu"=>$dejaLu,
-                "auteurs"=>$auteur,"nbEmprunt"=>$nbEmprunt,"listeIdDejaLu"=>$listeIdDejaLu));
+                "auteurs"=>$auteur,"nbEmprunt"=>$nbEmprunt,"listeIdDejaLu"=>$listeIdDejaLu,"examplaireRestant"=>$restant));
 
 
         }
