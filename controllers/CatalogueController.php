@@ -38,6 +38,11 @@ class CatalogueController extends WebController
 
         $pattern = '~\d+(&\d+)*$~';
 
+        if($path[0]=="%")
+        {
+            return 0;
+        }
+
         return preg_match($pattern, $path) === 1;
     }
 
@@ -65,6 +70,7 @@ class CatalogueController extends WebController
 
         else
         {
+
                 if($this->verifierFormat($type))
                 {
                     $casser = explode('&amp;', $type);
@@ -81,7 +87,7 @@ class CatalogueController extends WebController
 
                     $catalogue = $this->ressourceModel->recherche($mot);
 
-                    return Template::render("views/catalogue/liste.php", ["titre" => "Recherche à partir de : ".$mot, "listtype" => $listtype, "catalogue" => $catalogue]);
+                    return Template::render("views/catalogue/liste.php", ["titre" => "Recherche à partir de : ".$mot, "listtype" => $listtype, "catalogue" => $catalogue,"type" => $type]);
                 }
 
 
