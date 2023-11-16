@@ -126,7 +126,9 @@ class CatalogueController extends WebController
         if ($exemplaires && sizeof($exemplaires) > 0) {
             $exemplaire = $exemplaires[0];
         }
-
+        else{
+            $exemplaire=0;
+        }
 
 
         $restant=$this->exemplaireModel->getNbExemplaire($id)-$this->exemplaireModel->getNbEmprunt($id);

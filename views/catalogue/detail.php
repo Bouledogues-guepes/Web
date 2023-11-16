@@ -40,9 +40,6 @@ if (SessionHelpers::isConnected())
 }
 
 
-
-
-
 ?>
 
 
@@ -97,49 +94,49 @@ if (SessionHelpers::isConnected())
                     <form id="exemplaire" method="post" class="text-center pt-5 pb-3" action="/catalogue/emprunter">
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">
-                        <?php
-                        if (SessionHelpers::isConnected() && ($nbEmprunt->nb <3) && !$inTab && $examplaireRestant>0) {
-                            ?>
-                            <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full" title="Vous souhaitez emprunter cette ressource ? Il reste <?=$examplaireRestant?> exemplaire(s)">
-                                Emprunter
-                            </button><br><br>
-                        <?php }
-                        elseif (SessionHelpers::isConnected() && $nbEmprunt->nb >=3)
-                        {?>
-                            <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Vous avez atteint le maximum de livre à emprunter !" disabled>
-                        Emprunter
 
-                            </button>
-                            <br><br>
-                            <?php
-                        }
-                        elseif (SessionHelpers::isConnected() && $examplaireRestant==0)
-                        {
-                            ?>
-                            <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Plus aucun exemplaire de la ressource n'est disponible. Pardon !" disabled>
+                        <?php if (SessionHelpers::isConnected() && ($nbEmprunt->nb < 3) && !$inTab && $examplaireRestant > 0) { ?>
+                            <button type="submit" class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full"
+                                    title="Vous souhaitez emprunter cette ressource ? Il reste <?= $examplaireRestant ?> exemplaire(s)">
                                 Emprunter
-
                             </button>
-                            <br><br>
-                            <?php
-                        }
-                        elseif (SessionHelpers::isConnected() && $inTab )
-                        {
-                            ?>
+                        <?php } elseif (SessionHelpers::isConnected() && $nbEmprunt->nb >= 3) { ?>
                             <button type="submit"
-                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50"
+                                    title="Vous avez atteint le maximum de livres à emprunter !" disabled>
                                 Emprunter
-
                             </button>
-                            <br><br>
-                            <?php
-                        }
-                        ?>
+                        <?php } elseif (SessionHelpers::isConnected() && $examplaireRestant == 0) { ?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50"
+                                    title="Plus aucun exemplaire de la ressource n'est disponible. Pardon !" disabled>
+                                Emprunter
+                            </button>
+                        <?php } elseif (SessionHelpers::isConnected() && $inTab) { ?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50"
+                                    title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>
+                                Emprunter
+                            </button>
+                        <?php } else { ?>
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50"
+                                    title="Plus aucun exemplaire de la ressource n'est disponible. Pardon !" disabled>
+                                Emprunter
+                            </button>
+                        <?php } ?>
                     </form>
+                <?php } else { ?>
+                        <div class="text-center pt-5 pb-3">
+                            <button type="submit"
+                                    class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50"
+                                    title="Plus aucun exemplaire de la ressource n'est disponible. Pardon !" disabled>
+                                Emprunter
+                            </button>
+                        </div>
                 <?php } ?>
+
+
                 <div class="bg-gray-200 p-4 mb-2 rounded-lg">
                     <div class="flex justify-between items-center mb-4">
                         <h1 class="text-xl font-bold text-gray-900">Commentaires</h1>
