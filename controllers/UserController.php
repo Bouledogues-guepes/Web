@@ -264,6 +264,7 @@ class UserController extends WebController
         // On déclare l'emprunt, et on redirige l'utilisateur vers sa page de profil
 
         $nbEmprunt= $this->emprunter->nombreEmprunt( $user->idemprunteur);
+
         $nbExemplaire=$this->exemplaire->getNbExemplaire($idRessource);
         $nbEmprunt=$this->exemplaire->getNbEmprunt($idRessource) ;
 

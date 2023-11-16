@@ -128,7 +128,6 @@ if (SessionHelpers::isConnected())
                         }
                         elseif (SessionHelpers::isConnected() && $inTab )
                         {
-                            var_dump($examplaireRestant);
                             ?>
                             <button type="submit"
                                     class="bg-indigo-600 text-white hover-bg-indigo-900 font-bold py-3 px-6 rounded-full opacity-50" title="Veuillez rendre cette ressource pour l'emprunter à nouveau !" disabled>

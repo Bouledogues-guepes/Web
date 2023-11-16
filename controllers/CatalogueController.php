@@ -127,6 +127,8 @@ class CatalogueController extends WebController
             $exemplaire = $exemplaires[0];
         }
 
+
+
         $restant=$this->exemplaireModel->getNbExemplaire($id)-$this->exemplaireModel->getNbEmprunt($id);
 
         if ($restant<0){$restant=0;}

@@ -14,9 +14,16 @@ class ExemplaireModel extends SQL
     public function getByRessource(int $id): bool|array
     {
         try {
-            $sql = 'SELECT * FROM exemplaire WHERE idressource = ?';
+            $sql = 'SELECT idressource, idexemplaire
+FROM exemplaire
+WHERE idressource = ? AND (idressource, idexemplaire) NOT IN (
+    SELECT e.idressource, e.idexemplaire
+    FROM emprunter em
+    JOIN exemplaire e ON em.idressource = e.idressource AND em.idexemplaire = e.idexemplaire
+    WHERE em.idressource = ? AND em.EST_RENDU = 0
+);';
             $stmt = parent::getPdo()->prepare($sql);
-            $stmt->execute([$id]);
+            $stmt->execute([$id,$id]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
         } catch (\PDOException $e) {
             return false;
