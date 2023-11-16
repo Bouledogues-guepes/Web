@@ -9,20 +9,36 @@
                 <div class="mt-8 flex flex-col items-center">
                     <a href="/catalogue/all"
                        class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full mb-4">
-                        Parcourir les ressources
+                        📕 Parcourir toutes les ressources 📕
                     </a>
+
+
+                        <div class="flex mb-4">
+
+                            <a href="/catalogue/Chateaugiron"
+                               class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full ">
+                                Châteaugiron
+                            </a>
+                            <a href="/catalogue/Domloup"
+                               class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full ml-2">
+                                Domloup
+                            </a>
+                            <a href="/catalogue/Nouvoitou"
+                               class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full ml-2">
+                                Nouvoitou
+                            </a>
+
+                        </div>
 
                     <?php
                     if (isset($_SESSION['isAdmin'])) {
-?>
-
-                        <a href = "/statistique"
-                           class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full" >
-                        Voir les statistiques
-                        </a ><?php
-                        }
                         ?>
-                    </div>
+                        <a href="/statistique"
+                           class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full">
+                            📊 Voir les statistiques 📊
+                        </a>
+                    <?php }?>
+                </div>
             </div>
         </div>
     </section>

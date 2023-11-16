@@ -64,7 +64,7 @@ class Web
         }
         // Route permettant l'accès au catalogue.
 
-
+        Route::Add('/catalogue/ville',[$catalogue,'liste']);
         Route::Add('/catalogue/detail/{id}', [$catalogue, 'detail']);
 
 

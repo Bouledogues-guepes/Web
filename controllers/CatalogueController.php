@@ -67,7 +67,11 @@ class CatalogueController extends WebController
 
             return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue ));
         }
-
+        elseif ($type=="Nouvoitou" || $type=="Domloup" || $type=="Chateaugiron" )
+        {
+            $catalogue=$this->ressourceModel->recherche($mot,$type);
+            return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue de ".$type, "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue]);
+        }
         else
         {
 

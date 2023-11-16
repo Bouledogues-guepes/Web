@@ -148,17 +148,21 @@ group by commentaire.idressource order by moyenne desc ';
     }
 
 
-    public function recherche($mot):array
+    public function recherche($mot="",$ville=""):array
     {
         $sql = 'SELECT * FROM ressource 
                 INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie 
-                WHERE titre LIKE ? AND estArchive = 0';
+                INNER JOIN ville on ressource.idville = ville.idville
+                WHERE titre LIKE ? AND estArchive = 0 and nomville like ?';
 
         $motRecherche = '%' . $mot . '%';
+        $villeRecherche= '%' . $ville . '%';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute([$motRecherche]);
+        $stmt->execute([$motRecherche,$villeRecherche]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    //public recherche($mot)
 
 
 
