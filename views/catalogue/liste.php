@@ -1,5 +1,4 @@
 
-
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
 
     <h2 class="text-3xl font-bold text-gray-800 mb-4"><?= $titre ?></h2>
@@ -39,16 +38,30 @@
             <a href="/catalogue/all" class="text-indigo-600 hover:text-red-600 ml-2" title="Réinitialiser la recherche"> ❌️</a>
 
             <!-- Other buttons -->
-            <div class="flex mt-4 space-x-2">
-                <a href="/catalogue/Chateaugiron" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Chateaugiron
-                </a>
-                <a href="/catalogue/Domloup" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Domloup
-                </a>
-                <a href="/catalogue/Nouvoitou" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Nouvoitou
-                </a>
+            <div class="mt-4">
+                <select name="selectedVille" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <?php
+                    foreach ($nomVilles as $ville) {
+
+                        if (isset($_SESSION["retenirVille"]))
+                        {
+                            if ($ville==$_SESSION["retenirVille"])
+                            {
+                                echo '<option value="'.$ville.'" selected>'.$ville.'</option>';
+                            }
+                            else
+                            {
+                                echo '<option value="'.$ville.'">'.$ville.'</option>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<option value="'.$ville.'">'.$ville.'</option>';
+                        }
+
+                    }
+                    ?>
+                </select>
             </div>
 
         </form>

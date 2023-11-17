@@ -26,7 +26,6 @@ class MainController extends WebController
      */
     function home(): string
     {
-        // Affichage de la page à l'utilisateur
         return Template::render("views/global/home.php");
     }
 }

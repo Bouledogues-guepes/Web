@@ -1,5 +1,4 @@
 <section class="min-h-[calc(100vh-136px)]">
-
     <!-- Bannière principale -->
     <section class="bg-gradient-to-r from-blue-500 to-indigo-600">
         <div class="container mx-auto px-4 py-16 flex flex-col items-center">
@@ -12,23 +11,6 @@
                         📕 Parcourir toutes les ressources 📕
                     </a>
 
-
-                        <div class="flex mb-4">
-
-                            <a href="/catalogue/Chateaugiron"
-                               class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full ">
-                                Châteaugiron
-                            </a>
-                            <a href="/catalogue/Domloup"
-                               class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full ml-2">
-                                Domloup
-                            </a>
-                            <a href="/catalogue/Nouvoitou"
-                               class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full ml-2">
-                                Nouvoitou
-                            </a>
-
-                        </div>
 
                     <?php
                     if (isset($_SESSION['isAdmin'])) {

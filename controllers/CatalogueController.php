@@ -53,34 +53,46 @@ class CatalogueController extends WebController
      * @param string $type
      * @return string
      */
-    function liste(string $type,$mot=""): string
+    function liste(string $type="null",$mot=""): string
     {
 
         $listtype= $this->categorieModel->getAllType();
+        $villes=$this->ressourceModel->getAllVille();
 
+        $nomvilles = array_column($villes, 'nomville');
+
+        if(isset($_POST["selectedVille"]))
+        {
+            $_SESSION["retenirVille"]=$_POST["selectedVille"];
+        }
+
+
+        if(isset($_POST["selectedVille"]) and $type=="all")
+        {
+
+            $ville=$_POST["selectedVille"];
+
+            $catalogue = $this->ressourceModel->getAllByVille($ville);
+            return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue de ".$ville, "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue,"nomVilles"=>$nomvilles]);
+        }
 
 
         if ($type == "all") {
 
             $catalogue = $this->ressourceModel->getAllRessource();
-
-
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue ));
+            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue,"nomVilles"=>$nomvilles ));
         }
-        elseif ($type=="Nouvoitou" || $type=="Domloup" || $type=="Chateaugiron" )
-        {
-            $catalogue=$this->ressourceModel->recherche($mot,$type);
-            return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue de ".$type, "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue]);
-        }
+
         else
         {
 
                 if($this->verifierFormat($type))
                 {
+                    $ville=$_POST["selectedVille"];
                     $casser = explode('&amp;', $type);
                     $casser = implode(',', $casser);
-                    $catalogue = $this->ressourceModel->getRessourceByType($casser);
-                    return Template::render("views/catalogue/liste.php", ["titre" => "Ensemble du catalogue", "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue]);
+                    $catalogue = $this->ressourceModel->getRessourceByType($casser,$ville);
+                    return Template::render("views/catalogue/liste.php", ["titre" => "Selection du catalogue de ".$ville, "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue,"nomVilles"=>$nomvilles]);
                 }
                 else
                 {
@@ -91,7 +103,7 @@ class CatalogueController extends WebController
 
                     $catalogue = $this->ressourceModel->recherche($mot);
 
-                    return Template::render("views/catalogue/liste.php", ["titre" => "Recherche à partir de : ".$mot, "listtype" => $listtype, "catalogue" => $catalogue,"type" => $type]);
+                    return Template::render("views/catalogue/liste.php", ["titre" => "Recherche à partir de : '".$mot."' sur toutes les bibliothèques", "listtype" => $listtype, "catalogue" => $catalogue,"type" => $type,"nomVilles"=>$nomvilles]);
                 }
 
 

@@ -40,12 +40,21 @@ class RessourceModel extends SQL
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function getRessourceByType(string $id):array
+    public function getRessourceByType(string $id,$ville=""):array
     {
 
-        $sql = 'SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie where categorie.idcategorie in ('.$id.');';
+        $sql='SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie inner join ville on ressource.idville = ville.idville where categorie.idcategorie in (?) and nomville=?;';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([$id,$ville]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getAllByVille(string $ville):array
+    {
+
+        $sql='SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie inner join ville on ressource.idville = ville.idville where nomville=?;';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$ville]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -62,7 +71,7 @@ class RessourceModel extends SQL
     public function getLivreById($id): ?string
     {
         try {
-            $sql = 'SELECT titre from ressource where idressource = ?;';
+            $sql = 'SELECT titre from ressource  where idressource = ? ';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$id]);
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -148,21 +157,27 @@ group by commentaire.idressource order by moyenne desc ';
     }
 
 
-    public function recherche($mot="",$ville=""):array
+    public function recherche($mot=""):array
     {
         $sql = 'SELECT * FROM ressource 
                 INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie 
                 INNER JOIN ville on ressource.idville = ville.idville
-                WHERE titre LIKE ? AND estArchive = 0 and nomville like ?';
+                WHERE titre LIKE ? AND estArchive = 0 ';
 
         $motRecherche = '%' . $mot . '%';
-        $villeRecherche= '%' . $ville . '%';
+
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute([$motRecherche,$villeRecherche]);
+        $stmt->execute([$motRecherche]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    //public recherche($mot)
+    public function getAllVille(): array
+    {
+        $sql = 'SELECT * FROM ville';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 
 
