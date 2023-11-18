@@ -56,7 +56,7 @@ class RessourceModel extends SQL
 
 inner join categorie on ressource.idcategorie=categorie.idcategorie 
 inner join exemplaire on ressource.idressource = exemplaire.idressource 
-inner join ville on exemplaire.idville = ville.idville 
+inner join ville on exemplaire.idVille = ville.idVille 
 
 
 where nomVille=? and estArchive=0;';
