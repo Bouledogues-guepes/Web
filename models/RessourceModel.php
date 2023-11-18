@@ -43,7 +43,13 @@ class RessourceModel extends SQL
     public function getRessourceByType(string $id,$ville=""):array
     {
 
-        $sql='SELECT * FROM `ressource` inner join categorie on ressource.idcategorie=categorie.idcategorie inner join ville on ressource.idville = ville.idville where categorie.idcategorie in (?) and nomville=?;';
+        $sql='select distinct ressource.idressource,ressource.idcategorie,ressource.titre,ressource.description ,ressource.image ,ressource.anneesortie,isbn,langue,estArchive,libellecategorie,nomville FROM `ressource` 
+
+inner join categorie on ressource.idcategorie=categorie.idcategorie 
+inner join exemplaire on ressource.idressource=exemplaire.idressource
+inner join ville on exemplaire.idVille = ville.idVille 
+
+where categorie.idcategorie in (?) and nomville=?;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$id,$ville]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -169,7 +175,7 @@ group by commentaire.idressource order by moyenne desc ';
         $sql = 'SELECT * FROM ressource 
                 INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie 
                 INNER JOIN exemplaire on ressource.idressource=exemplaire.idressource
-                INNER JOIN ville on exemplaire.idville = ville.idville
+                INNER JOIN ville on exemplaire.idVille = ville.idVille
                 WHERE titre LIKE ? AND estArchive = 0 ';
 
         $motRecherche = '%' . $mot . '%';
