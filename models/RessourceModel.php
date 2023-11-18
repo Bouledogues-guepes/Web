@@ -52,14 +52,14 @@ class RessourceModel extends SQL
     public function getAllByVille(string $ville):array
     {
 
-        $sql='select * from ressource 
+        $sql='select distinct ressource.idressource,ressource.idcategorie,ressource.titre,ressource.description ,ressource.image ,ressource.anneesortie,isbn,langue,estArchive,libellecategorie,nomville from ressource 
 
 inner join categorie on ressource.idcategorie=categorie.idcategorie 
 inner join exemplaire on ressource.idressource = exemplaire.idressource 
 inner join ville on exemplaire.idville = ville.idville 
 
 
-where nomVille=?';
+where nomVille=? and estArchive=0;';
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute([$ville]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
