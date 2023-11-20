@@ -20,7 +20,7 @@
                 <li><strong>Mot de passe :</strong>*********</li>
             </ul>
             <p class="mt-4">Pour finaliser votre inscription, merci de cliquer sur le lien ci-dessous :</p>
-            <p class="mt-2"><a href="http://<?= $url ?>" class="text-blue-500 hover:underline">Valider l'inscription</a></p>
+            <p class="mt-2"><a href="http://192.168.103.2/<?= $url ?>" class="text-blue-500 hover:underline">Valider l'inscription</a></p>
             <p class="mt-4">A bientôt sur notre site !</p>
         </div>
     </body>
