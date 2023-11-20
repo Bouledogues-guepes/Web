@@ -195,23 +195,23 @@ class CatalogueController extends WebController
 
         $user = SessionHelpers::getConnected();
         $idemprunteur=$user->idemprunteur;
-
-        $idRessourceLu=$this->emprunterModel->ressourceDejaLu($idemprunteur);
-
         $idressource=$_POST["idRessource"];
 
 
-        foreach ($idRessourceLu as $id)
+        $idRessourceLu=$this->emprunterModel->ressourceDejaLu($idemprunteur,$idressource);
+
+        if ($idRessourceLu)
         {
-            if ( $id->idressource == $idressource)
-            {
-                $this->ressourceModel->addCommentaireOnId($cleanText,$note,$idemprunteur,$idressource);
-                header("Location: /catalogue/detail/$idressource?commentAdded=true");
-                return true;
-            }
+            $this->ressourceModel->addCommentaireOnId($cleanText,$note,$idemprunteur,$idressource);
+            header("Location: /catalogue/detail/$idressource?commentAdded=true");
+            return true;
         }
-        header("Location: /catalogue/detail/$idressource?commentAdded=false");
-        return false;
+        else
+        {
+            header("Location: /catalogue/detail/$idressource?commentAdded=false");
+            return false;
+        }
+
 
     }
 

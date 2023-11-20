@@ -164,7 +164,7 @@ if (SessionHelpers::isConnected())
                                 </form>
                         <?php } ?>
                     </div>
-                    <div id="confirmationDiv" class="hidden bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mt-2">
+                    <div id="confirmationDiv" class="hidden bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-2">
                         Votre commentaire a été ajouté avec succès. Merci !
                     </div>
 
