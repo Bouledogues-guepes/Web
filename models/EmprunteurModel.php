@@ -105,7 +105,7 @@ class EmprunteurModel extends SQL
                 // L'email contient un lien vers la page de validation du compte, avec l'UUID généré précédemment
                 EmailUtils::sendEmail($email, "Bienvenue $nom", "newAccount",
                     array(
-                        "url" => "/valider-compte/" . $UUID,
+                        "url" => "192.168.103.2/valider-compte/" . $UUID,
                         "email" => $email,
                         "password" => $password
                     )
