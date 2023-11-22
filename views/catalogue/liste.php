@@ -99,9 +99,18 @@
                 <img loading="lazy" src="/public/assets/<?= $ressource->image ?>" alt="<?= htmlspecialchars($ressource->titre) ?>" class="w-full h-64 object-cover object-center rounded-t-lg">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2 truncate"><?= $ressource->titre ?></h3>
-                    <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300">
-                        <div class="text-xs font-normal leading-none max-w-full flex-initial">
-                            <?= $ressource->libellecategorie ?>
+
+                    <div class="flex items-center">
+                        <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300">
+                            <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                <?= $ressource->libellecategorie ?>
+                            </div>
+                        </div>
+
+                        <div class="ml-2 w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-green-700 bg-green-100 border border-green-300">
+                            <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                <?= $ressource->nomville ?>
+                            </div>
                         </div>
                     </div>
                 </div>

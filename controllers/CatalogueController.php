@@ -79,7 +79,7 @@ class CatalogueController extends WebController
 
         if ($type == "all") {
 
-            $catalogue = $this->ressourceModel->getAllRessource();
+            $catalogue = $this->ressourceModel->recherche("");
             return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "listtype"=>$listtype,"type" => $type,"catalogue" => $catalogue,"nomVilles"=>$nomvilles ));
         }
 

@@ -49,14 +49,25 @@
                 <!-- On affiche le titre et la catégorie de la ressource -->
                 <!-- via la syntaxe {{ … }} qui permet d'insérer le contenu d'une variable dans du HTML -->
                 <!-- C'est une possibilité offerte par VueJS -->
-                <div class="p-6">
+                <div class="p-6 flex flex-col items-center">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2 truncate" :title="r.titre">{{ r.titre }}</h3>
-                    <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
-                        <div class="text-xs font-normal leading-none max-w-full flex-initial">
-                            {{ r.libellecategorie }}
+
+                    <div class="mb-2 flex items-center">
+                        <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300">
+                            <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                {{ r.libellecategorie }}
+                            </div>
+                        </div>
+
+                        <div class="ml-2 w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300">
+                            <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                {{ r.nomVille }}
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
             </a>
 
             <!---
