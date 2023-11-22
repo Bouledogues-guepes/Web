@@ -58,7 +58,6 @@ class RessourceModel extends SQL
 
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
-
     public function getAllByVille(string $ville):array
     {
 
