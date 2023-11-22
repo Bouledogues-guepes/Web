@@ -37,18 +37,25 @@ class RessourceModel extends SQL
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function getRessourceByType(string $id,$ville=""):array
+    public function getRessourceByType(string $id, $ville = ""): array
     {
+        $idsArray = explode(',', $id);
+        $idsArray = array_map('intval', $idsArray);
+        $placeholders = rtrim(str_repeat('?,', count($idsArray)), ',');
 
-        $sql='select distinct ressource.idressource,ressource.idcategorie,ressource.titre,ressource.description ,ressource.image ,ressource.anneesortie,isbn,langue,estArchive,libellecategorie,nomville FROM `ressource` 
+        $sql = 'SELECT DISTINCT ressource.idressource, ressource.idcategorie, ressource.titre, ressource.description, ressource.image, ressource.anneesortie, isbn, langue, estArchive, libellecategorie, nomville
+            FROM ressource
+            INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie
+            INNER JOIN exemplaire ON ressource.idressource = exemplaire.idressource
+            INNER JOIN ville ON exemplaire.idVille = ville.idVille
+            WHERE categorie.idcategorie IN (' . $placeholders . ')
+            AND nomville = ?';
 
-inner join categorie on ressource.idcategorie=categorie.idcategorie 
-inner join exemplaire on ressource.idressource=exemplaire.idressource
-inner join ville on exemplaire.idVille = ville.idVille 
+        $params = array_merge($idsArray, [$ville]);
 
-where categorie.idcategorie in (?) and nomville=?;';
         $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute([$id,$ville]);
+        $stmt->execute($params);
+
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -156,16 +163,6 @@ group by commentaire.idressource order by moyenne desc ';
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
-
-
-    public function getAllRessource():array
-    {
-        $sql = 'SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie where estArchive != 1;';
-        $stmt = parent::getPdo()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);
-    }
-
 
     public function recherche($mot=""):array
     {

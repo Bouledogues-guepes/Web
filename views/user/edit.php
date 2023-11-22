@@ -16,11 +16,11 @@
                         </div>
                         <?php unset($_SESSION['errorInfo']); ?>
                     <?php endif; ?>
-                    <input type="text" placeholder="Nouveau nom" class="w-full mt-2 border p-2 rounded-lg" name="newName">
-                    <input type="text" placeholder="Nouveau prénom" class="w-full mt-2 border p-2 rounded-lg" name="newPname">
-                    <input type="date" placeholder="Nouvelle date de naissance" class="w-full mt-2 border p-2 rounded-lg" name="newDateN">
-                    <input type="email" placeholder="Nouvel email" class="w-full mt-2 border p-2 rounded-lg" name="newEmail">
-                    <input type="number" placeholder="Nouveau téléphone" class="w-full mt-2 border p-2 rounded-lg" name="newTel">
+                    <input type="text" placeholder="Nouveau nom" class="w-full mt-2 border p-2 rounded-lg" name="newName" required>
+                    <input type="text" placeholder="Nouveau prénom" class="w-full mt-2 border p-2 rounded-lg" name="newPname" required>
+                    <input type="date" placeholder="Nouvelle date de naissance" class="w-full mt-2 border p-2 rounded-lg" name="newDateN" r required>
+                    <input type="email" placeholder="Nouvel email" class="w-full mt-2 border p-2 rounded-lg" name="newEmail" required>
+                    <input type="number" placeholder="Nouveau téléphone" class="w-full mt-2 border p-2 rounded-lg" name="newTel" required>
                 </div>
 
 
@@ -37,28 +37,28 @@
         <div class="w-full md:w-1/3 px-4">
             <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg px-6 py-4">
                 <form method="post" action="/me/edit/password">
-                <div class="mb-4">
+                    <div class="mb-4">
 
-                    <h2 class="text-xl font-semibold text-gray-800 mb-2 ">Modifier le mots de passe</h2>
-                    <?php if (isset($_SESSION['errorPassword'])): ?>
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                            <span class="block sm:inline"><?= htmlspecialchars($_SESSION['errorPassword']) ?></span>
-                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                        </span>
-                        </div>
-                        <?php unset($_SESSION['errorPassword']); ?>
-                    <?php endif; ?>
-                    <input type="password" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
-                    <br>
-                    <input type="password" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">
-                    <input type="password" placeholder="Confirmation mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="confirmNewPassword">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2 ">Modifier le mots de passe</h2>
+                        <?php if (isset($_SESSION['errorPassword'])): ?>
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                                <span class="block sm:inline"><?= htmlspecialchars($_SESSION['errorPassword']) ?></span>
+                                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                            </span>
+                            </div>
+                            <?php unset($_SESSION['errorPassword']); ?>
+                        <?php endif; ?>
+                        <input type="password" placeholder="Ancien mots de passe" class="w-full mt-2 border p-2 rounded-lg" name="currentPassword">
+                        <br>
+                        <input type="password" placeholder="Nouveau mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="newPassword">
+                        <input type="password" placeholder="Confirmation mot de passe" class="w-full mt-2 border p-2 rounded-lg" name="confirmNewPassword">
 
-                </div>
+                    </div>
 
-                <div class="p-5 text-center">
-                    <input type="submit" value="Modifier" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2" >
+                    <div class="p-5 text-center">
+                        <input type="submit" value="Modifier" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-4 px-6 rounded-full mr-2" >
 
-                </div>
+                    </div>
                 </form>
             </div>
         </div>

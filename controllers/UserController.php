@@ -361,11 +361,15 @@ class UserController extends WebController
         $newName=strip_tags(htmlspecialchars($newName));
         $newPname=strip_tags(htmlspecialchars($newPname));
 
-
-
-        if ($this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel)){
+        if(strlen($newName)<=2 ||strlen($newPname)<=2)
+        {
+            $_SESSION['errorInfo'] = 'La taille de votre nom/prénom doit être supérieur ou égal à 2!';
+            header("Location:/me/edit");
+        }
+        elseif ($this->emprunteur->modifyInfo($idUser,$newName, $newPname, $newDateN, $newEmail, $newTel)){
             SessionHelpers::setLogin($newName,$newPname,$newDateN,$newEmail,$newTel);
             $_SESSION['modifInfo'] = 'Vos informations personnelles ont bien été modifiés';
+            header("Location:/me");
         }
         else
         {
@@ -375,7 +379,7 @@ class UserController extends WebController
 
         //SessionHelpers::login();
 
-        header("Location:/me");
+
     }
     function editUserPassword($currentPassword, $newPassword, $confirmNewPassword): void
     {
