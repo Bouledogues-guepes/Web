@@ -169,11 +169,11 @@ group by commentaire.idressource order by moyenne desc ';
 
     public function recherche($mot=""):array
     {
-        $sql = 'SELECT * FROM ressource 
+        $sql = 'select distinct ressource.idressource,ressource.idcategorie,ressource.titre,ressource.description ,ressource.image ,ressource.anneesortie,isbn,langue,estArchive,libellecategorie,nomville FROM ressource 
                 INNER JOIN categorie ON ressource.idcategorie = categorie.idcategorie 
                 INNER JOIN exemplaire on ressource.idressource=exemplaire.idressource
                 INNER JOIN ville on exemplaire.idVille = ville.idVille
-                WHERE titre LIKE ? AND estArchive = 0 ';
+                WHERE titre LIKE ? AND estArchive = 0';
 
         $motRecherche = '%' . $mot . '%';
 
