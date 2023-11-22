@@ -33,17 +33,8 @@ class CatalogueController extends WebController
     function verifierFormat($url)
     {
 
-        $path = parse_url($url, PHP_URL_PATH);
-
-
-        $pattern = '~\d+(&\d+)*$~';
-
-        if($path[0]=="%")
-        {
-            return 0;
-        }
-
-        return preg_match($pattern, $path) === 1;
+        $pattern = '~^\d+(?:&\d+)*$~';
+        return preg_match($pattern, $url) === 1;
     }
 
 
@@ -55,6 +46,7 @@ class CatalogueController extends WebController
      */
     function liste(string $type="null",$mot=""): string
     {
+
 
         $listtype= $this->categorieModel->getAllType();
         $villes=$this->ressourceModel->getAllVille();
@@ -88,10 +80,19 @@ class CatalogueController extends WebController
 
                 if($this->verifierFormat($type))
                 {
-                    $ville=$_POST["selectedVille"];
+                    if (isset($_POST["selectedVille"])) {
+                        $ville = $_POST["selectedVille"];
+                    }
+                    else
+                    {
+                        $ville="";
+                    }
+
+
                     $casser = explode('&amp;', $type);
                     $casser = implode(',', $casser);
                     $catalogue = $this->ressourceModel->getRessourceByType($casser,$ville);
+
                     return Template::render("views/catalogue/liste.php", ["titre" => "Selection du catalogue de ".$ville, "listtype" => $listtype, "type" => $type, "catalogue" => $catalogue,"nomVilles"=>$nomvilles]);
                 }
                 else
