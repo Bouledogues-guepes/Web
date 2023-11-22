@@ -33,8 +33,17 @@ class CatalogueController extends WebController
     function verifierFormat($url)
     {
 
-        $pattern = '~^\d+(?:&\d+)*$~';
-        return preg_match($pattern, $url) === 1;
+        $path = parse_url($url, PHP_URL_PATH);
+
+
+        $pattern = '~\d+(&\d+)*$~';
+
+        if($path[0]=="%")
+        {
+            return 0;
+        }
+
+        return preg_match($pattern, $path) === 1;
     }
 
 
